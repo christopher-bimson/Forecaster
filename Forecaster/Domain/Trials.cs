@@ -26,7 +26,7 @@ namespace Forecaster.Domain
             return trials;
         }
 
-        public static void Summarize(this Trial[] trials, TextWriter writer, int summaryBandSize = 10)
+        public static void Summarize(this Trial[] trials, IOutputWriter writer, int summaryBandSize = 10)
         {
             if (trials == null)
                 throw new ArgumentNullException(nameof(trials));
@@ -43,7 +43,7 @@ namespace Forecaster.Domain
 
             var bands = CalculateSummarizedBands(trials, summaryBandSize);
             var summary = SummarizeTrials(trials, bands);
-            WriteSummary(summary, writer);
+            writer.Write(summary);
         }
 
         private static IEnumerable<int> CalculateSummarizedBands(IEnumerable<Trial> trials, int bandSize)
@@ -64,16 +64,6 @@ namespace Forecaster.Domain
         private static double CalculateLikelihoodForBand(Trial[] trials, int band)
         {
             return (double)trials.Count(trial => trial.Total >= band) / trials.Length;
-        }
-
-        private static void WriteSummary(IEnumerable<BandLikelihood> summary, TextWriter writer)
-        {
-            writer.WriteLine("|{0, 22}|{1, 22}|", "Forecast Throughput", "Likelihood");
-            foreach (var thresholdLikelihood in summary)
-            {
-                writer.WriteLine("|{0, 22}|{1, 22}|", $"At Least {thresholdLikelihood.Band} WUs",
-                    thresholdLikelihood.Likelihood.ToString("P2"));
-            }
         }
     }
 }

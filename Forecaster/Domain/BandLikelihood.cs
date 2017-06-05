@@ -1,6 +1,6 @@
 namespace Forecaster.Domain
 {
-    internal class BandLikelihood
+    public class BandLikelihood
     {
         internal BandLikelihood(int band, double likelihood)
         {
@@ -8,7 +8,7 @@ namespace Forecaster.Domain
             Likelihood = likelihood;
         }
 
-        internal int Band { get; private set; }
-        internal double Likelihood { get; private set; }
+        public int Band { get; private set; }
+        public double Likelihood { get; private set; }
     }
 }

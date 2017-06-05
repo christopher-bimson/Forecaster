@@ -18,7 +18,7 @@ namespace Forecaster
             var historicSamples = new HistoricSamples(new Random(), options.HistoricThroughput);
 
             var trials = Trials.Generate(historicSamples, options.PeriodsToForecast, options.NumberOfTrials);
-            trials.Summarize(Console.Out);
+            trials.Summarize(new PrettyOutputWriter());
         }
     }
 }
