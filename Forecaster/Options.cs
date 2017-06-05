@@ -2,6 +2,13 @@
 
 namespace Forecaster
 {
+    public enum ForecastOutputFormat
+    {
+        Pretty,
+        Json,
+        Csv
+    }
+
     public class Options
     {
         private const string HistoricThroughputHelpText =
@@ -12,7 +19,10 @@ namespace Forecaster
             "The number of time periods to forecast. Must be a positive value.";
 
         private const string NumberOfTrialsHelpText =
-            "The number of trials (consider a trial to be a 'potential future') to use when calculating the forecast."; 
+            "The number of trials (consider a trial to be a 'potential future') to use when calculating the forecast.";
+
+        private const string OutputFormatHelpText =
+            "The format to use when outputting results. Choose from Pretty, Json and CSV.";
 
         [OptionArray('h', "historicThroughput", Required = true, HelpText = HistoricThroughputHelpText)]
         public double[] HistoricThroughput { get; set; }
@@ -22,6 +32,10 @@ namespace Forecaster
 
         [Option('t', "numberOfTrials", DefaultValue = 100000, HelpText = NumberOfTrialsHelpText)]
         public int NumberOfTrials { get; set; }
+
+        [Option('o', "outputFormat", DefaultValue = ForecastOutputFormat.Pretty, HelpText = OutputFormatHelpText)]
+        public ForecastOutputFormat OutputFormat { get; set; }
+
 
         public Options()
         {
