@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\CsvOutputWriter.cs" />
     <Compile Include="Domain\DoubleExtensions.cs" />
     <Compile Include="Domain\HistoricSamples.cs" />
     <Compile Include="Domain\IOutputWriter.cs" />
