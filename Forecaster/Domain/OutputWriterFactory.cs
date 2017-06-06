@@ -16,6 +16,9 @@ namespace Forecaster.Domain
 
         internal static IOutputWriter Create(ForecastOutputFormat format)
         {
+            if (!OutputWriters.ContainsKey(format))
+                throw new ArgumentOutOfRangeException(nameof(format), $"No IOutputWriter is defined for the output format {format}.");
+
             return OutputWriters[format];
         }
     }

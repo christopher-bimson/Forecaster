@@ -11,9 +11,9 @@ namespace Forecaster.Domain
     {
         private readonly TextWriter _textWriter;
 
-        internal CsvOutputWriter(TextWriter writer)
+        internal CsvOutputWriter(TextWriter textWriter)
         {
-            _textWriter = writer;
+            _textWriter = textWriter ?? throw new ArgumentNullException(nameof(textWriter));
         }
 
         public void Write(IEnumerable<BandLikelihood> summary)
