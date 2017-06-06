@@ -117,6 +117,7 @@
     <Compile Include="Domain\HistoricSamples.cs" />
     <Compile Include="Domain\IOutputWriter.cs" />
     <Compile Include="Domain\JsonOutputWriter.cs" />
+    <Compile Include="Domain\OutputWriterFactory.cs" />
     <Compile Include="Domain\PrettyOutputWriter.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
