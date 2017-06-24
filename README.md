@@ -22,6 +22,10 @@ Forecaster 1.0.0.0
   -t, --numberOfTrials        (Default: 100000) The number of trials (consider
                               a trial to be a 'potential future') to use when
                               calculating the forecast.
+
+  -o, --outputFormat          (Default: Pretty) The format to use when
+                              outputting results. Choose from Pretty, Json and
+                              CSV.
 ```
 ## Tests
 Um. There aren't any. Yet. Lazy on my part. Mea Culpa.
