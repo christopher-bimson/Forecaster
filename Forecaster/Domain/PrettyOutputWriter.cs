@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using ConsoleTables;
-using System;
 using System.Linq;
 
 namespace Forecaster.Domain
@@ -11,7 +10,7 @@ namespace Forecaster.Domain
         {
             var table = ConsoleTable.From(summary.Select(o => new PrettyBandLikelihoodAdapter(o)));
             table.Options.EnableCount = false;
-            table.Columns = new[] { "Forecast Throughput", "Likelyhood" };
+            table.Columns = new[] { "Forecast Throughput", "Likelihood" };
             table.Write();
         }
 
