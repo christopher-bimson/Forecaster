@@ -28,35 +28,21 @@ namespace Forecaster.Core.Model
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
             var results = new List<Bucket>();
-            var bucketCount = GetBucketCount(trials);
-            var bucketSize = GetBucketSize(trials, bucketCount);
+            var BucketCount = Math.Min(trials.Distinct().Count()-1, 10);
 
-            var bucketValue = bucketSize;
-            while (bucketValue <= trials.Max())
+            var bandSize = Convert.ToInt32((trials.Max() - trials.Min()) / BucketCount);
+
+            var banding = bandSize;
+            while (banding <= trials.Max())
             {
-                var matchingTrials = trials.Where(t => t >= bucketValue).Count();
-                if (matchingTrials > 0)
+                var trialCount = trials.Where(v => v >= banding).Count();
+                if (trialCount > 0)
                 {
-                    results.Add(new Bucket(CalculateLikelihood(matchingTrials, matchingTrials), bucketValue));
+                    results.Add(new Bucket((trialCount / (double)trials.Length) * 100, banding));
                 }
-                bucketValue += bucketSize;
+                banding += bandSize;
             }
             return results;
-        }
-
-        private static double CalculateLikelihood(int matchingTrials, int totalTrials)
-        {
-            return (matchingTrials / (double)totalTrials) * 100;
-        }
-
-        private static int GetBucketSize(double[] trials, int bucketCount)
-        {
-            return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
-        }
-
-        private static int GetBucketCount(double[] trials)
-        {
-            return Math.Min(trials.Distinct().Count() - 1, 10);
         }
     }
 }
