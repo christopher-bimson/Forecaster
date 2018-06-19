@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Forecaster.Core.Model;
+using NSubstitute;
 using System.Linq;
 using Xunit;
 
@@ -20,6 +21,29 @@ namespace Forecaster.Tests.Core.Model
 
             trialData.Length.Should().Be(arguments.TrialCount);
             trialData.ToList().ForEach(value => value.Should().Be(expectedTrialValue));
+        }
+
+        [Fact]
+        public void Summarize_A_Set_Of_Trials_Into_10_Bands()
+        {
+            var trialData = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+            var expectedBands = new [] {
+                new Band(10, 100),
+                new Band(10, 90),
+                new Band(10, 80),
+                new Band(10, 70),
+                new Band(10, 60),
+                new Band(10, 50),
+                new Band(10, 40),
+                new Band(10, 30),
+                new Band(10, 20),
+                new Band(10, 10),
+            };
+
+            var trials = new Trials(Substitute.For<IRng>());
+            var bands = trials.Summarize(trialData);
+
+            bands.Should().BeEquivalentTo(expectedBands);
         }
     }
 }
