@@ -28,7 +28,9 @@ namespace Forecaster.Core.Model
         public IEnumerable<Band> Summarize(double[] trials)
         {
             var results = new List<Band>();
-            var bandSize = (trials.Max() - trials.Min()) / 9;
+            var bucket = Math.Min(trials.Distinct().Count()-1, 9);
+
+            var bandSize = (trials.Max() - trials.Min()) / (double)bucket;
 
             var banding = bandSize;
             while (banding <= trials.Max())

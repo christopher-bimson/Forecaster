@@ -24,7 +24,7 @@ namespace Forecaster.Tests.Core.Model
         }
 
         [Fact]
-        public void Summarize_A_Set_Of_Trials_Into_10_Bands()
+        public void Summarize_10_Trials_Incrementing_By_10_Into_10_Bands()
         {
             var trialData = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             var expectedBands = new [] {
@@ -38,6 +38,24 @@ namespace Forecaster.Tests.Core.Model
                 new Band(80, 30),
                 new Band(90, 20),
                 new Band(100, 10),
+            };
+
+            var trials = new Trials(Substitute.For<IRng>());
+            var bands = trials.Summarize(trialData);
+
+            bands.Should().BeEquivalentTo(expectedBands);
+        }
+
+        [Fact]
+        public void Summarize_5_Trials_Incrementing_By_10_Into_10_Bands()
+        {
+            var trialData = new double[] { 20, 40, 60, 80, 100 };
+            var expectedBands = new[] {
+                new Band(20, 100),
+                new Band(40, 80),
+                new Band(60, 60),
+                new Band(80, 40),
+                new Band(100, 20),
             };
 
             var trials = new Trials(Substitute.For<IRng>());
