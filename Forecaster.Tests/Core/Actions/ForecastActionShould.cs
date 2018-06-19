@@ -2,6 +2,7 @@
 using Forecaster.Core.Actions;
 using Forecaster.Core.Model;
 using NSubstitute;
+using System;
 using Xunit;
 
 namespace Forecaster.Tests.Core.Actions
@@ -21,12 +22,30 @@ namespace Forecaster.Tests.Core.Actions
             TrialsMock.Generate(arguments).Returns(fakeTrials);
             TrialsMock.Summarize(fakeTrials).Returns(fakeForecast);
 
-            var action = new ForecastAction();
+            var action = new ForecastAction(TrialsMock);
             var forecast = action.Execute(arguments);
 
             TrialsMock.Received().Generate(arguments);
             TrialsMock.Received().Summarize(fakeTrials);
-            forecast.Should().Be(fakeForecast);
+            forecast.Should().BeSameAs(fakeForecast);
+        }
+
+        [Fact]
+        public void Throw_If_Asked_To_Generate_A_Forecast_From_Null_Arguments()
+        {
+            var action = new ForecastAction(TrialsMock);
+
+            Action generate = () => action.Execute(null);
+
+            generate.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Throw_On_Construction_If_Invariants_Are_Not_Satisfied()
+        {
+            Action constructor = () => new ForecastAction(null);
+
+            constructor.Should().Throw<ArgumentNullException>();
         }
     }
 }

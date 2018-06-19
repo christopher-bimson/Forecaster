@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Forecaster\Forecaster.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Model\" />
+  </ItemGroup>
+
 </Project>
