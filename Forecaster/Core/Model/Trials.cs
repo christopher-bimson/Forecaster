@@ -25,24 +25,38 @@ namespace Forecaster.Core.Model
             return result;
         }
 
-        public IEnumerable<Band> Summarize(double[] trials)
+        public IEnumerable<Bucket> Summarize(double[] trials)
         {
-            var results = new List<Band>();
-            var bucket = Math.Min(trials.Distinct().Count()-1, 9);
+            var results = new List<Bucket>();
+            var bucketCount = GetBucketCount(trials);
+            var bucketSize = GetBucketSize(trials, bucketCount);
 
-            var bandSize = (trials.Max() - trials.Min()) / (double)bucket;
-
-            var banding = bandSize;
-            while (banding <= trials.Max())
+            var bucketValue = bucketSize;
+            while (bucketValue <= trials.Max())
             {
-                var trialCount = trials.Where(v => v >= banding).Count();
-                if (trialCount > 0)
+                var matchingTrials = trials.Where(t => t >= bucketValue).Count();
+                if (matchingTrials > 0)
                 {
-                    results.Add(new Band((trialCount / (double)trials.Length) * 100, banding));
+                    results.Add(new Bucket(CalculateLikelihood(matchingTrials, matchingTrials), bucketValue));
                 }
-                banding += bandSize;
+                bucketValue += bucketSize;
             }
             return results;
+        }
+
+        private static double CalculateLikelihood(int matchingTrials, int totalTrials)
+        {
+            return (matchingTrials / (double)totalTrials) * 100;
+        }
+
+        private static int GetBucketSize(double[] trials, int bucketCount)
+        {
+            return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
+        }
+
+        private static int GetBucketCount(double[] trials)
+        {
+            return Math.Min(trials.Distinct().Count() - 1, 10);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Forecaster.Core.Model
 {
-    public struct Band
+    public struct Bucket
     {
-        public Band(double likelihood, double value) : this()
+        public Bucket(double likelihood, double value) : this()
         {
             Likelihood = likelihood;
             Value = value;
@@ -14,10 +14,10 @@
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Band))
+            if (!(obj is Bucket))
                 return false;
 
-            var other = (Band)obj;
+            var other = (Bucket)obj;
 
             return other.Likelihood == Likelihood &&
                 other.Value == Value;

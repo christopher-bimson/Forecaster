@@ -16,7 +16,7 @@ namespace Forecaster.Core.Actions
             this.trials = trials;
         }
 
-        public IEnumerable<Band> Execute(IForecastArguments arguments)
+        public IEnumerable<Bucket> Execute(IForecastArguments arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
