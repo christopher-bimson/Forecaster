@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Forecaster.Core.Model
@@ -13,19 +14,16 @@ namespace Forecaster.Core.Model
             this.rng = rng;
         }
 
-        public double[] GenerateFor(IForecastArguments arguments)
+        public double[] GenerateFrom(IForecastArguments arguments)
         {
-            var result = new List<double>();
-            for(int i = 0; i < arguments.TrialCount; i++)
+            var result = new double[arguments.TrialCount];
+            for(int i = 0; i < result.Length; i++)
             {
-                double sum = 0;
-                for(int j = 0; j < arguments.Forecast; j++)
-                {
-                    sum += arguments.Samples[rng.Next(arguments.Samples.Length)];
-                }
-                result.Add(sum);
+                result[i] = arguments.Samples
+                    .SampleWithReplacement(arguments.Forecast, rng)
+                    .Sum();
             }
-            return result.ToArray();
+            return result;
         }
 
         public IEnumerable<Band> Summarize(double[] trials)

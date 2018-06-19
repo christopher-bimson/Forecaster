@@ -16,7 +16,7 @@ namespace Forecaster.Tests.Core.Model
             var expectedTrialValue = arguments.Samples.Sum();
 
             var trials = new Trials(rng);
-            var trialData = trials.GenerateFor(arguments);
+            var trialData = trials.GenerateFrom(arguments);
 
             trialData.Length.Should().Be(arguments.TrialCount);
             trialData.ToList().ForEach(value => value.Should().Be(expectedTrialValue));

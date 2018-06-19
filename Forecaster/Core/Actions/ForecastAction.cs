@@ -21,7 +21,7 @@ namespace Forecaster.Core.Actions
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));
 
-            var data = trials.GenerateFor(arguments);
+            var data = trials.GenerateFrom(arguments);
             return trials.Summarize(data);
         }
     }

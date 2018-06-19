@@ -20,13 +20,13 @@ namespace Forecaster.Tests.Core.Actions
                 5, 1000);
             var fakeTrials = new double[] { 1, 2, 3, 4, 5 };
             var fakeForecast = new Band[] { new Band(100.0, 1) };
-            TrialsMock.GenerateFor(arguments).Returns(fakeTrials);
+            TrialsMock.GenerateFrom(arguments).Returns(fakeTrials);
             TrialsMock.Summarize(fakeTrials).Returns(fakeForecast);
 
             var action = new ForecastAction(TrialsMock);
             var forecast = action.Execute(arguments);
 
-            TrialsMock.Received().GenerateFor(arguments);
+            TrialsMock.Received().GenerateFrom(arguments);
             TrialsMock.Received().Summarize(fakeTrials);
             forecast.Should().BeSameAs(fakeForecast);
         }
