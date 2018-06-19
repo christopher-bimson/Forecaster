@@ -28,19 +28,18 @@ namespace Forecaster.Core.Model
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
             var results = new List<Bucket>();
-            var BucketCount = Math.Min(trials.Distinct().Count()-1, 10);
+            var bucketCount = Math.Min(trials.Distinct().Count()-1, 10);
+            var bucketSize = Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
 
-            var bandSize = Convert.ToInt32((trials.Max() - trials.Min()) / BucketCount);
-
-            var banding = bandSize;
-            while (banding <= trials.Max())
+            var bucketValue = bucketSize;
+            while (bucketValue <= trials.Max())
             {
-                var trialCount = trials.Where(v => v >= banding).Count();
+                var trialCount = trials.Where(v => v >= bucketValue).Count();
                 if (trialCount > 0)
                 {
-                    results.Add(new Bucket((trialCount / (double)trials.Length) * 100, banding));
+                    results.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
                 }
-                banding += bandSize;
+                bucketValue += bucketSize;
             }
             return results;
         }
