@@ -1,6 +1,6 @@
 ﻿using Forecaster.Core.Model;
 
-namespace Forecaster.Tests.Core.Actions
+namespace Forecaster.Tests.Core.Model
 {
     internal class TestForecastArguments : IForecastArguments
     {
@@ -8,13 +8,13 @@ namespace Forecaster.Tests.Core.Actions
         {
             Samples = samples;
             Forecast = forecast;
-            Trials = trials;
+            TrialCount = trials;
         }
 
         public double[] Samples { get; private set; }
 
         public int Forecast { get; private set; }
 
-        public int Trials { get; private set; }
+        public int TrialCount { get; private set; }
     }
 }

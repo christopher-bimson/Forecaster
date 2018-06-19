@@ -8,6 +8,6 @@ namespace Forecaster.Core.Model
     {
         double[] Samples { get; }
         int Forecast { get; }
-        int Trials { get; }
+        int TrialCount { get; }
     }
 }

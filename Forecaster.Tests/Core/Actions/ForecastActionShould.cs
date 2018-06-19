@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Forecaster.Core.Actions;
 using Forecaster.Core.Model;
+using Forecaster.Tests.Core.Model;
 using NSubstitute;
 using System;
 using Xunit;
@@ -19,13 +20,13 @@ namespace Forecaster.Tests.Core.Actions
                 5, 1000);
             var fakeTrials = new double[] { 1, 2, 3, 4, 5 };
             var fakeForecast = new Band[] { new Band(100.0, 1) };
-            TrialsMock.Generate(arguments).Returns(fakeTrials);
+            TrialsMock.GenerateFor(arguments).Returns(fakeTrials);
             TrialsMock.Summarize(fakeTrials).Returns(fakeForecast);
 
             var action = new ForecastAction(TrialsMock);
             var forecast = action.Execute(arguments);
 
-            TrialsMock.Received().Generate(arguments);
+            TrialsMock.Received().GenerateFor(arguments);
             TrialsMock.Received().Summarize(fakeTrials);
             forecast.Should().BeSameAs(fakeForecast);
         }

@@ -6,7 +6,7 @@ namespace Forecaster.Core.Model
 {
     public interface ITrials
     {
-        double[] Generate(IForecastArguments arguments);
+        double[] GenerateFor(IForecastArguments arguments);
         IEnumerable<Band> Summarize(double[] trials);
     }
 }
