@@ -28,13 +28,13 @@ namespace Forecaster.Core.Model
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
             var results = new List<Bucket>();
-            var bucketCount = Math.Min(trials.Distinct().Count()-1, 10);
-            var bucketSize = Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
+            int bucketCount = GetBucketCount(trials);
+            int bucketSize = GetBucketSize(trials, bucketCount);
 
             var bucketValue = bucketSize;
             while (bucketValue <= trials.Max())
             {
-                var trialCount = trials.Where(v => v >= bucketValue).Count();
+                var trialCount = trials.Where(t => t >= bucketValue).Count();
                 if (trialCount > 0)
                 {
                     results.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
@@ -42,6 +42,16 @@ namespace Forecaster.Core.Model
                 bucketValue += bucketSize;
             }
             return results;
+        }
+
+        private static int GetBucketSize(double[] trials, int bucketCount)
+        {
+            return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
+        }
+
+        private static int GetBucketCount(double[] trials)
+        {
+            return Math.Min(trials.Distinct().Count() - 1, 10);
         }
     }
 }
