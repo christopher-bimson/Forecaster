@@ -27,7 +27,7 @@ namespace Forecaster.Core.Model
 
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
-            var results = new List<Bucket>();
+            var buckets = new List<Bucket>();
             int bucketCount = GetBucketCount(trials);
             int bucketSize = GetBucketSize(trials, bucketCount);
 
@@ -37,11 +37,11 @@ namespace Forecaster.Core.Model
                 var trialCount = trials.Where(t => t >= bucketValue).Count();
                 if (trialCount > 0)
                 {
-                    results.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
+                    buckets.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
                 }
                 bucketValue += bucketSize;
             }
-            return results;
+            return buckets;
         }
 
         private static int GetBucketSize(double[] trials, int bucketCount)
