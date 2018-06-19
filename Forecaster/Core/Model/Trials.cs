@@ -27,7 +27,20 @@ namespace Forecaster.Core.Model
 
         public IEnumerable<Band> Summarize(double[] trials)
         {
-            throw new NotImplementedException();
+            var results = new List<Band>();
+            var bandSize = (trials.Max() - trials.Min()) / 9;
+
+            var banding = bandSize;
+            while (banding <= trials.Max())
+            {
+                var trialCount = trials.Where(v => v >= banding).Count();
+                if (trialCount > 0)
+                {
+                    results.Add(new Band((trialCount / (double)trials.Length) * 100, banding));
+                }
+                banding += bandSize;
+            }
+            return results;
         }
     }
 }

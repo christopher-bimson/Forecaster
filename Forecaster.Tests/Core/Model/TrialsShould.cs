@@ -29,15 +29,15 @@ namespace Forecaster.Tests.Core.Model
             var trialData = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             var expectedBands = new [] {
                 new Band(10, 100),
-                new Band(10, 90),
-                new Band(10, 80),
-                new Band(10, 70),
-                new Band(10, 60),
-                new Band(10, 50),
-                new Band(10, 40),
-                new Band(10, 30),
-                new Band(10, 20),
-                new Band(10, 10),
+                new Band(20, 90),
+                new Band(30, 80),
+                new Band(40, 70),
+                new Band(50, 60),
+                new Band(60, 50),
+                new Band(70, 40),
+                new Band(80, 30),
+                new Band(90, 20),
+                new Band(100, 10),
             };
 
             var trials = new Trials(Substitute.For<IRng>());
