@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Forecaster.Core.Model
 {
-    public interface ITrials
+    public interface IForecast
     {
-        double[] GenerateFrom(IForecastArguments arguments);
+        IEnumerable<Bucket> Summarize(double[] trials);
     }
 }

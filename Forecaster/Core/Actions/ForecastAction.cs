@@ -7,13 +7,18 @@ namespace Forecaster.Core.Actions
     public class ForecastAction
     {
         private readonly ITrials trials;
+        private readonly IForecast forecast;
 
-        public ForecastAction(ITrials trials)
+        public ForecastAction(ITrials trials, IForecast forecast)
         {
             if (trials == null)
                 throw new ArgumentNullException(nameof(trials));
 
+            if (forecast == null)
+                throw new ArgumentNullException(nameof(forecast));
+
             this.trials = trials;
+            this.forecast = forecast;
         }
 
         public IEnumerable<Bucket> Execute(IForecastArguments arguments)
@@ -22,7 +27,7 @@ namespace Forecaster.Core.Actions
                 throw new ArgumentNullException(nameof(arguments));
 
             var data = trials.GenerateFrom(arguments);
-            return trials.Summarize(data);
+            return forecast.Summarize(data);
         }
     }
 }

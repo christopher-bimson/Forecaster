@@ -24,34 +24,5 @@ namespace Forecaster.Core.Model
             }
             return result;
         }
-
-        public IEnumerable<Bucket> Summarize(double[] trials)
-        {
-            var buckets = new List<Bucket>();
-            int bucketCount = GetBucketCount(trials);
-            int bucketSize = GetBucketSize(trials, bucketCount);
-
-            var bucketValue = bucketSize;
-            while (bucketValue <= trials.Max())
-            {
-                var trialCount = trials.Where(t => t >= bucketValue).Count();
-                if (trialCount > 0)
-                {
-                    buckets.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
-                }
-                bucketValue += bucketSize;
-            }
-            return buckets;
-        }
-
-        private static int GetBucketSize(double[] trials, int bucketCount)
-        {
-            return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
-        }
-
-        private static int GetBucketCount(double[] trials)
-        {
-            return Math.Min(trials.Distinct().Count() - 1, 10);
-        }
     }
 }
