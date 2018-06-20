@@ -10,21 +10,31 @@ namespace Forecaster.Core.Model
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
             var buckets = new List<Bucket>();
-            int bucketCount = GetForecaseBucketCount(trials);
+            int bucketCount = GetForecastBucketCount(trials);
             int bucketSize = GetForecastBucketSize(trials, bucketCount);
             double biggestTrial = trials.Max();
 
             var bucketValue = bucketSize;
-            while (bucketValue <= biggestTrial)
+            while (ThereAreStillBucketsToSummarize(biggestTrial, bucketValue))
             {
-                var trialCount = trials.Where(t => t >= bucketValue).Count();
-                if (trialCount > 0)
-                {
-                    buckets.Add(new Bucket(Math.Round((trialCount / (decimal)trials.Length) * 100, 2), bucketValue));
-                }
+                CalculateLikelihoodForTrialsInBucket(trials, buckets, bucketValue);
                 bucketValue += bucketSize;
             }
             return buckets;
+        }
+
+        private static void CalculateLikelihoodForTrialsInBucket(double[] trials, List<Bucket> buckets, int bucketValue)
+        {
+            var trialCount = trials.Where(t => t >= bucketValue).Count();
+            if (trialCount > 0)
+            {
+                buckets.Add(new Bucket(Math.Round((trialCount / (decimal)trials.Length) * 100, 2), bucketValue));
+            }
+        }
+
+        private static bool ThereAreStillBucketsToSummarize(double biggestTrial, int bucketValue)
+        {
+            return bucketValue <= biggestTrial;
         }
 
         private static int GetForecastBucketSize(double[] trials, int bucketCount)
@@ -32,7 +42,7 @@ namespace Forecaster.Core.Model
             return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
         }
 
-        private static int GetForecaseBucketCount(double[] trials)
+        private static int GetForecastBucketCount(double[] trials)
         {
             return Math.Min(trials.Distinct().Count() - 1, 10);
         }
