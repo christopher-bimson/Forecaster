@@ -19,7 +19,7 @@ namespace Forecaster.Tests.Core.Actions
         {
             IForecastArguments arguments = new TestForecastArguments(new[] { 5.0, 5.0, 5.0 }, 5, 1000);
             var fakeTrials = new double[] { 1, 2, 3, 4, 5 };
-            var fakeForecast = new Bucket[] { new Bucket(100.0, 1) };
+            var fakeForecast = new Bucket[] { new Bucket(100.0m, 1) };
 
             TrialsMock.GenerateFrom(arguments).Returns(fakeTrials);
             ForecastMock.Summarize(fakeTrials).Returns(fakeForecast);

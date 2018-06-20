@@ -56,16 +56,16 @@ namespace Forecaster.Tests.Core.Model
             var list = Enumerable.Range(1, 5000).ToList();
             list.AddRange(Enumerable.Range(1, 5000));
             var expectedBands = new[] {
-                new Bucket(90.02, 500),
-                new Bucket(80.02, 1000),
-                new Bucket(70.02, 1500),
-                new Bucket(60.02, 2000),
-                new Bucket(50.02, 2500),
-                new Bucket(40.02, 3000),
-                new Bucket(30.02, 3500),
-                new Bucket(20.02, 4000),
-                new Bucket(10.02, 4500),
-                new Bucket(0.02, 5000),
+                new Bucket(90.02m, 500),
+                new Bucket(80.02m, 1000),
+                new Bucket(70.02m, 1500),
+                new Bucket(60.02m, 2000),
+                new Bucket(50.02m, 2500),
+                new Bucket(40.02m, 3000),
+                new Bucket(30.02m, 3500),
+                new Bucket(20.02m, 4000),
+                new Bucket(10.02m, 4500),
+                new Bucket(0.02m, 5000),
             };
 
             var forecast = new Forecast();
