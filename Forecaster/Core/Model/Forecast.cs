@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Forecaster.Core.Model
 {
@@ -9,27 +8,34 @@ namespace Forecaster.Core.Model
     {
         public IEnumerable<Bucket> Summarize(double[] trials)
         {
-            var buckets = new List<Bucket>();
-            int bucketCount = GetForecastBucketCount(trials);
-            int bucketSize = GetForecastBucketSize(trials, bucketCount);
-            double biggestTrial = trials.Max();
+            double trialsMin = trials.Min();
+            double trialsMax = trials.Max();
+            int trialCount = trials.Length;
 
-            var bucketValue = bucketSize;
-            while (ThereAreStillBucketsToSummarize(biggestTrial, bucketValue))
+            var bucketCount = GetNumberOfBuckets(trials);
+            int bucketSize = GetSizeOfBuckets(trialsMin, trialsMax, bucketCount);
+
+            var buckets = new List<Bucket>();
+            var bucketValue = 0;
+            do
             {
-                CalculateLikelihoodForTrialsInBucket(trials, buckets, bucketValue);
                 bucketValue += bucketSize;
-            }
-            return buckets;
+                var relevantTrials = GetCountOfTrialsLargerThanBucket(trials, bucketValue);
+                if (relevantTrials > 0)
+                    yield return new Bucket(CalculateLikelihood(trialCount, relevantTrials), bucketValue);
+                else
+                    yield break;
+            } while (bucketValue <= trialsMax);
         }
 
-        private static void CalculateLikelihoodForTrialsInBucket(double[] trials, List<Bucket> buckets, int bucketValue)
+        private static int GetCountOfTrialsLargerThanBucket(double[] trials, int bucketValue)
         {
-            var trialCount = trials.Where(t => t >= bucketValue).Count();
-            if (trialCount > 0)
-            {
-                buckets.Add(new Bucket(Math.Round((trialCount / (decimal)trials.Length) * 100, 2), bucketValue));
-            }
+            return trials.Where(t => t >= bucketValue).Count();
+        }
+
+        private static decimal CalculateLikelihood(int totalTrials, int relevantTrials)
+        {
+            return Math.Round((relevantTrials / (decimal)totalTrials) * 100, 2);
         }
 
         private static bool ThereAreStillBucketsToSummarize(double biggestTrial, int bucketValue)
@@ -37,12 +43,12 @@ namespace Forecaster.Core.Model
             return bucketValue <= biggestTrial;
         }
 
-        private static int GetForecastBucketSize(double[] trials, int bucketCount)
+        private static int GetSizeOfBuckets(double min, double max, int bucketCount)
         {
-            return Convert.ToInt32((trials.Max() - trials.Min()) / bucketCount);
+            return Convert.ToInt32((max - min) / bucketCount);
         }
 
-        private static int GetForecastBucketCount(double[] trials)
+        private static int GetNumberOfBuckets(double[] trials)
         {
             return Math.Min(trials.Distinct().Count() - 1, 10);
         }
