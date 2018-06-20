@@ -20,7 +20,7 @@ namespace Forecaster.Core.Model
                 var trialCount = trials.Where(t => t >= bucketValue).Count();
                 if (trialCount > 0)
                 {
-                    buckets.Add(new Bucket((trialCount / (double)trials.Length) * 100, bucketValue));
+                    buckets.Add(new Bucket(Math.Round((trialCount / (double)trials.Length) * 100, 2), bucketValue));
                 }
                 bucketValue += bucketSize;
             }
