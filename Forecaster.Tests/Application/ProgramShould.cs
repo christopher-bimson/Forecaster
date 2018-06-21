@@ -29,7 +29,7 @@ namespace Forecaster.Tests.Application
             };
             var forecast = new Bucket[] { new Bucket(100, 1) };
 
-            parser.Parse(args).Returns(new Alternative<IForecastArguments, IEnumerable<Error>>(parsedArguments));
+            parser.Parse(args).Returns(new Alternative<Options, IEnumerable<Error>>(parsedArguments));
             forecastAction.Execute(parsedArguments).Returns(forecast);
             rendererFactory.Create().Returns(renderer);
             

@@ -16,6 +16,9 @@ namespace Forecaster.Application.Input
         [Option('t', "trials", Required = false, Default = 10000)]
         public int Trials { get; set; }
 
+        [Option('o', "outputFormat", Required = false, Default = OutputFormat.Pretty)]
+        public OutputFormat Output { get; set; }
+
         double[] IForecastArguments.Samples => Samples.ToArray();
 
         int IForecastArguments.Forecast => Forecast;
