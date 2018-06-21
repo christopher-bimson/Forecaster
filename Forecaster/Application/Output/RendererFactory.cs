@@ -19,7 +19,7 @@ namespace Forecaster.Application.Output
                 case OutputFormat.Json:
                     return new JsonRenderer(writer);
                 case OutputFormat.Markdown:
-                    return new MarkdownRenderer();
+                    return new MarkdownRenderer(writer);
                 default:
                     return new PrettyRenderer(writer);
             }

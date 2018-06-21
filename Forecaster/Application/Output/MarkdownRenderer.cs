@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using BetterConsoleTables;
 using Forecaster.Core.Model.Summary;
 
 namespace Forecaster.Application.Output
 {
-    public class MarkdownRenderer : IRenderer
+    public class MarkdownRenderer : TableRenderer
     {
-        public void Render(IEnumerable<Bucket> summarizedForecast)
+        public MarkdownRenderer(TextWriter writer) : base(writer)
         {
-            throw new NotImplementedException();
+        }
+
+        protected override TableConfiguration GetTableConfig()
+        {
+            return TableConfiguration.Markdown();
         }
     }
 }
