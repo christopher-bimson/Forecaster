@@ -6,6 +6,7 @@ using Forecaster.Core.Model.Action;
 using Forecaster.Core.Model.Summary;
 using NSubstitute;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace Forecaster.Tests.Application
@@ -14,7 +15,7 @@ namespace Forecaster.Tests.Application
     {
         private readonly ParserAdapter parser = Substitute.For<ParserAdapter>();
         private readonly IForecastAction forecastAction = Substitute.For<IForecastAction>();
-        private readonly RendererFactory rendererFactory = Substitute.For<RendererFactory>();
+        private readonly RendererFactory rendererFactory = Substitute.For<RendererFactory>(Substitute.For<TextWriter>());
         private readonly IRenderer renderer = Substitute.For<IRenderer>();
 
         [Fact]

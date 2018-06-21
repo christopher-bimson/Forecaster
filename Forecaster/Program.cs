@@ -3,6 +3,7 @@ using Forecaster.Application.Output;
 using Forecaster.Core.Action;
 using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
+using System;
 
 namespace Forecaster
 {
@@ -13,7 +14,7 @@ namespace Forecaster
             var forecastAction = new ForecastAction(new Trials(new RandomRng()),
                 new ForecastSummarizer());
 
-            var program = new Program(new ParserAdapter(), forecastAction, new RendererFactory());
+            var program = new Program(new ParserAdapter(), forecastAction, new RendererFactory(Console.Out));
             program.Run(args);
         }
 
