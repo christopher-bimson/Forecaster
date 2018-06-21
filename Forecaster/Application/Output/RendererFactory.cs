@@ -1,5 +1,4 @@
-﻿using System;
-using Forecaster.Application.Input;
+﻿using Forecaster.Application.Input;
 
 namespace Forecaster.Application.Output
 {
@@ -10,11 +9,9 @@ namespace Forecaster.Application.Output
             switch (outputFormat)
             {
                 case OutputFormat.Json:
-                    throw new NotImplementedException();
-                    break;
+                    return new JsonRenderer();
                 case OutputFormat.Markdown:
-                    throw new NotImplementedException();
-                    break;
+                    return new MarkdownRenderer();
                 default:
                     return new PrettyRenderer();
             }
