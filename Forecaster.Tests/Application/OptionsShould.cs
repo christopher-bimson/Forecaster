@@ -26,7 +26,26 @@ namespace Forecaster.Tests.Application
                 })
                 .WithNotParsed(errors =>
                 {
-                    Assert.Empty(errors);
+                    errors.Should().BeEmpty("all of the examples in this theory should parse.");
+                });
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("-f 5 -t 1000")]
+        [InlineData("--samples -forecast 5")]
+        [InlineData("--samples 1 2 3 4 -forecast")]
+        [InlineData("--samples 1 2 3 4 -forecast wibble")]
+        public void Fail_To_Parse_If_Syntactically_Invalid(string args)
+        {
+            Parser.Default.ParseArguments<Options>(args.Split(' '))
+                .WithParsed(options =>
+                {
+                    options.Should().BeNull("none of the example in this theory should parse.");
+                })
+                .WithNotParsed(errors =>
+                {
+                    errors.Should().NotBeEmpty();
                 });
         }
     }
