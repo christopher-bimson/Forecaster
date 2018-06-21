@@ -1,15 +1,17 @@
-﻿using Forecaster.Core.Model;
+﻿using Forecaster.Core.Model.Action;
+using Forecaster.Core.Model.Summary;
+using Forecaster.Core.Model.Trial;
 using System;
 using System.Collections.Generic;
 
-namespace Forecaster.Core.Actions
+namespace Forecaster.Core.Action
 {
-    public class ForecastAction
+    public class ForecastAction : IForecastAction
     {
         private readonly ITrials trials;
-        private readonly IForecast forecast;
+        private readonly IForecastSummarizer forecast;
 
-        public ForecastAction(ITrials trials, IForecast forecast)
+        public ForecastAction(ITrials trials, IForecastSummarizer forecast)
         {
             if (trials == null)
                 throw new ArgumentNullException(nameof(trials));

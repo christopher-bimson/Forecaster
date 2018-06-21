@@ -1,6 +1,6 @@
-﻿using Forecaster.Core.Model;
+﻿using Forecaster.Core.Model.Action;
 
-namespace Forecaster.Tests.Core.Model
+namespace Forecaster.Tests.Core.Action
 {
     internal class TestForecastArguments : IForecastArguments
     {

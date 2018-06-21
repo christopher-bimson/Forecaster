@@ -1,4 +1,4 @@
-﻿namespace Forecaster.Core.Model
+﻿namespace Forecaster.Core.Model.Summary
 {
     public struct Bucket
     {

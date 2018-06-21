@@ -1,17 +1,18 @@
 ﻿using FluentAssertions;
-using Forecaster.Core.Actions;
-using Forecaster.Core.Model;
-using Forecaster.Tests.Core.Model;
+using Forecaster.Core.Action;
+using Forecaster.Core.Model.Action;
+using Forecaster.Core.Model.Summary;
+using Forecaster.Core.Model.Trial;
 using NSubstitute;
 using System;
 using Xunit;
 
-namespace Forecaster.Tests.Core.Actions
+namespace Forecaster.Tests.Core.Action
 {
     public class ForecastActionShould
     {
         private ITrials TrialsMock = Substitute.For<ITrials>();
-        private IForecast ForecastMock = Substitute.For<IForecast>();
+        private IForecastSummarizer ForecastMock = Substitute.For<IForecastSummarizer>();
 
 
         [Fact]
@@ -37,7 +38,7 @@ namespace Forecaster.Tests.Core.Actions
         {
             var action = new ForecastAction(TrialsMock, ForecastMock);
 
-            Action generate = () => action.Execute(null);
+            System.Action generate = () => action.Execute(null);
 
             generate.Should().Throw<ArgumentNullException>();
         }
@@ -45,7 +46,7 @@ namespace Forecaster.Tests.Core.Actions
         [Fact]
         public void Throw_On_Construction_If_ITrial_Invariant_Is_Not_Satisfied()
         {
-            Action constructor = () => new ForecastAction(null, ForecastMock);
+            System.Action constructor = () => new ForecastAction(null, ForecastMock);
 
             constructor.Should().Throw<ArgumentNullException>();
         }
@@ -53,7 +54,7 @@ namespace Forecaster.Tests.Core.Actions
         [Fact]
         public void Throw_On_Construction_If_IForecast_Invariant_Is_Not_Satisfied()
         {
-            Action constructor = () => new ForecastAction(TrialsMock, null);
+            System.Action constructor = () => new ForecastAction(TrialsMock, null);
 
             constructor.Should().Throw<ArgumentNullException>();
         }

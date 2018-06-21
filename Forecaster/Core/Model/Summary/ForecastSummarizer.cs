@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Forecaster.Core.Model
+namespace Forecaster.Core.Model.Summary
 {
-    public class Forecast : IForecast
+    public class ForecastSummarizer : IForecastSummarizer
     {
         public IEnumerable<Bucket> Summarize(double[] trials)
         {

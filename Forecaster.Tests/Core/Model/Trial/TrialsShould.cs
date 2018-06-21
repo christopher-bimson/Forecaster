@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Forecaster.Core.Model;
+using Forecaster.Core.Model.Trial;
+using Forecaster.Tests.Core.Action;
 using NSubstitute;
 using System.Collections.Generic;
 using System.Linq;

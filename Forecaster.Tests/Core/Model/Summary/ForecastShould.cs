@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
-using Forecaster.Core.Model;
+using Forecaster.Core.Model.Summary;
 using System.Linq;
 using Xunit;
 
-namespace Forecaster.Tests.Core.Model
+namespace Forecaster.Tests.Core.Model.Summary
 {
-    public class ForecastShould
+    public class ForecastSummarizerShould
     {
 
         [Fact]
@@ -26,7 +26,7 @@ namespace Forecaster.Tests.Core.Model
             };
 
 
-            var forecast = new Forecast();
+            var forecast = new ForecastSummarizer();
             var bands = forecast.Summarize(trialData);
 
             bands.Should().BeEquivalentTo(expectedBands);
@@ -44,7 +44,7 @@ namespace Forecaster.Tests.Core.Model
                 new Bucket(100, 20),
             };
 
-            var forecast = new Forecast();
+            var forecast = new ForecastSummarizer();
             var bands = forecast.Summarize(trialData);
 
             bands.Should().BeEquivalentTo(expectedBands);
@@ -68,8 +68,8 @@ namespace Forecaster.Tests.Core.Model
                 new Bucket(0.02m, 5000),
             };
 
-            var forecast = new Forecast();
-            var bands = forecast.Summarize(list.ConvertAll<double>(x => (double)x).ToArray());
+            var forecast = new ForecastSummarizer();
+            var bands = forecast.Summarize(list.ConvertAll(x => (double)x).ToArray());
 
             bands.Should().BeEquivalentTo(expectedBands);
         }

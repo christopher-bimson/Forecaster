@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Forecaster.Core.Model
+﻿namespace Forecaster.Core.Model.Action
 {
     public interface IForecastArguments
     {

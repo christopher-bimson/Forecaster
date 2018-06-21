@@ -1,4 +1,4 @@
-﻿using Forecaster.Core.Model;
+﻿using Forecaster.Core.Model.Trial;
 
 namespace Forecaster.Tests.Core.Model
 {

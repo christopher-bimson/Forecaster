@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Forecaster.Core.Model.Action;
 
-namespace Forecaster.Core.Model
+namespace Forecaster.Core.Model.Trial
 {
     public interface ITrials
     {

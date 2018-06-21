@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Forecaster.Core.Model.Action;
+using System;
 using System.Linq;
 
-namespace Forecaster.Core.Model
+namespace Forecaster.Core.Model.Trial
 {
     public class Trials : ITrials
     {
