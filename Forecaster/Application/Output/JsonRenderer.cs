@@ -1,14 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using Forecaster.Core.Model.Summary;
+using Newtonsoft.Json;
 
 namespace Forecaster.Application.Output
 {
     public class JsonRenderer : IRenderer
     {
+        private TextWriter writer;
+
+        public JsonRenderer(TextWriter writer)
+        {
+            this.writer = writer;
+        }
+
         public void Render(IEnumerable<Bucket> summarizedForecast)
         {
-            throw new NotImplementedException();
+            writer.Write(JsonConvert.SerializeObject(summarizedForecast));
         }
     }
 }

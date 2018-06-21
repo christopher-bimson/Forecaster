@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Forecaster.Application.Output;
+﻿using Forecaster.Application.Output;
 using Forecaster.Core.Model.Summary;
 using NSubstitute;
 using System;

@@ -17,7 +17,7 @@ namespace Forecaster.Application.Output
             switch (outputFormat)
             {
                 case OutputFormat.Json:
-                    return new JsonRenderer();
+                    return new JsonRenderer(writer);
                 case OutputFormat.Markdown:
                     return new MarkdownRenderer();
                 default:
