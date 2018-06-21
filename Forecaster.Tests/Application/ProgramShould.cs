@@ -31,7 +31,7 @@ namespace Forecaster.Tests.Application
 
             parser.Parse(args).Returns(new Alternative<Options, IEnumerable<Error>>(parsedArguments));
             forecastAction.Execute(parsedArguments).Returns(forecast);
-            rendererFactory.Create().Returns(renderer);
+            rendererFactory.CreateFor(parsedArguments.Output).Returns(renderer);
             
 
             var program = new Program(parser, forecastAction, rendererFactory);
@@ -39,7 +39,7 @@ namespace Forecaster.Tests.Application
 
             parser.Received().Parse(args);
             forecastAction.Received().Execute(parsedArguments);
-            rendererFactory.Received().Create();
+            rendererFactory.Received().CreateFor(parsedArguments.Output);
             renderer.Received().Render(forecast);
         }
     }

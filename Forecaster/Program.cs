@@ -34,7 +34,7 @@ namespace Forecaster
             if (parserResult.IsSuccess)
             {
                 var summarizedForecast = forecastAction.Execute(parserResult.Success);
-                var renderer = rendererFactory.Create();
+                var renderer = rendererFactory.CreateFor(parserResult.Success.Output);
                 renderer.Render(summarizedForecast);
             }
         }
