@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Cli\" />
+    <Folder Include="Application\" />
   </ItemGroup>
 
   <ItemGroup>
