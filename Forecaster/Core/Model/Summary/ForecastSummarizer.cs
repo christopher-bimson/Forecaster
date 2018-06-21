@@ -16,16 +16,21 @@ namespace Forecaster.Core.Model.Summary
             int bucketSize = GetSizeOfBuckets(trialsMin, trialsMax, bucketCount);
 
             var buckets = new List<Bucket>();
-            var bucketValue = 0;
+            var bucketThreshold = GetThresholdLowerBound(trialsMin, bucketSize);
             do
             {
-                bucketValue += bucketSize;
-                var relevantTrials = GetCountOfTrialsLargerThanBucket(trials, bucketValue);
+                bucketThreshold += bucketSize;
+                var relevantTrials = GetCountOfTrialsLargerThanBucket(trials, bucketThreshold);
                 if (relevantTrials > 0)
-                    yield return new Bucket(CalculateLikelihood(trialCount, relevantTrials), bucketValue);
+                    yield return new Bucket(CalculateLikelihood(trialCount, relevantTrials), bucketThreshold);
                 else
                     yield break;
-            } while (bucketValue <= trialsMax);
+            } while (bucketThreshold <= trialsMax);
+        }
+
+        private static int GetThresholdLowerBound(double trialsMin, int bucketSize)
+        {
+            return Math.Max(0, Convert.ToInt32(trialsMin - bucketSize));
         }
 
         private static int GetCountOfTrialsLargerThanBucket(double[] trials, int bucketValue)
@@ -45,7 +50,12 @@ namespace Forecaster.Core.Model.Summary
 
         private static int GetSizeOfBuckets(double min, double max, int bucketCount)
         {
-            return Convert.ToInt32((max - min) / bucketCount);
+            var diff = max - min;
+
+            if (diff == 0)
+                return 1;
+
+            return Convert.ToInt32(Math.Ceiling(diff / bucketCount));
         }
 
         private static int GetNumberOfBuckets(double[] trials)
