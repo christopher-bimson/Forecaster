@@ -1,4 +1,4 @@
-﻿namespace Forecaster.Application
+﻿namespace Forecaster.Application.Input
 {
     public class Alternative<THappyPath, TSadPath>
     {

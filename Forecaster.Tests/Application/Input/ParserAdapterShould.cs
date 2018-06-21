@@ -1,9 +1,8 @@
-﻿using CommandLine;
-using FluentAssertions;
-using Forecaster.Application;
+﻿using FluentAssertions;
+using Forecaster.Application.Input;
 using Xunit;
 
-namespace Forecaster.Tests.Application
+namespace Forecaster.Tests.Application.Input
 {
     public class ParserAdapterShould
     {

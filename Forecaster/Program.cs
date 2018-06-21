@@ -1,9 +1,8 @@
-﻿using Forecaster.Application;
+﻿using Forecaster.Application.Input;
+using Forecaster.Application.Output;
 using Forecaster.Core.Action;
 using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
-using System;
-using System.IO;
 
 namespace Forecaster
 {

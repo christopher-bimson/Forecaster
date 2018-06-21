@@ -1,11 +1,11 @@
 ﻿using CommandLine;
-using Forecaster.Application;
+using Forecaster.Application.Input;
+using Forecaster.Application.Output;
 using Forecaster.Core.Action;
 using Forecaster.Core.Model.Action;
 using Forecaster.Core.Model.Summary;
 using NSubstitute;
 using System.Collections.Generic;
-using System.IO;
 using Xunit;
 
 namespace Forecaster.Tests.Application

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Forecaster.Core.Model.Summary;
 
-namespace Forecaster.Application
+namespace Forecaster.Application.Output
 {
     public interface IRenderer
     {

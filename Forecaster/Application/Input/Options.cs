@@ -3,7 +3,7 @@ using Forecaster.Core.Model.Action;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Forecaster.Application
+namespace Forecaster.Application.Input
 {
     public class Options : IForecastArguments
     {

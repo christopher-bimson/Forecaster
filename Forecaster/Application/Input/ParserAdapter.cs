@@ -2,7 +2,7 @@
 using Forecaster.Core.Model.Action;
 using System.Collections.Generic;
 
-namespace Forecaster.Application
+namespace Forecaster.Application.Input
 {
     public class ParserAdapter
     {

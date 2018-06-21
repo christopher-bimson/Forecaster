@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Forecaster.Application
+namespace Forecaster.Application.Output
 {
     public class RendererFactory
     {
