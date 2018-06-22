@@ -4,6 +4,7 @@ using Forecaster.Application.Output;
 using Forecaster.Core.Action;
 using Forecaster.Core.Model.Action;
 using Forecaster.Core.Model.Summary;
+using Forecaster.Core.Model.Trial;
 using NSubstitute;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +14,23 @@ namespace Forecaster.Tests.Application
 {
     public class ProgramShould
     {
-        private readonly TextWriter stdOut = Substitute.For<TextWriter>();
-        private readonly ParserAdapter parser = Substitute.For<ParserAdapter>();
-        private readonly IForecastAction forecastAction = Substitute.For<IForecastAction>();
-        private readonly RendererFactory rendererFactory = Substitute.For<RendererFactory>(Substitute.For<TextWriter>());
-        private readonly IRenderer renderer = Substitute.For<IRenderer>();
+        private readonly TextWriter stdOut;
+        private readonly ParserAdapter parser;
+        private readonly ForecastAction forecastAction;
+        private readonly RendererFactory rendererFactory;
+        private readonly IRenderer renderer;
+
+        public ProgramShould()
+        {
+            stdOut = Substitute.For<TextWriter>();
+            parser = Substitute.For<ParserAdapter>();
+            var rng = Substitute.For<IRng>();
+            var trialGenerator = Substitute.For<TrialGenerator>(rng);
+            var summarizer = Substitute.For<ForecastSummarizer>();
+            forecastAction = Substitute.For<ForecastAction>(trialGenerator, summarizer);
+            rendererFactory = Substitute.For<RendererFactory>(stdOut);
+            renderer = Substitute.For<IRenderer>();
+        }
 
         [Fact]
         public void Accept_Valid_Arguments_And_Print_A_Forecast()

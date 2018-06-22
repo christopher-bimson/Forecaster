@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Forecaster.Core.Model.Trial
 {
-    public class TrialGenerator : ITrialGenerator
+    public class TrialGenerator
     {
         private readonly IRng rng;
 
@@ -13,7 +13,7 @@ namespace Forecaster.Core.Model.Trial
             this.rng = rng;
         }
 
-        public Trials GenerateFrom(IForecastArguments arguments)
+        public virtual Trials GenerateFrom(IForecastArguments arguments)
         {
             var result = new double[arguments.TrialCount];
             for(int i = 0; i < result.Length; i++)

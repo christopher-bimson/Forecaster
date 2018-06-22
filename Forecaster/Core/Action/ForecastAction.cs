@@ -6,12 +6,12 @@ using System.Collections.Generic;
 
 namespace Forecaster.Core.Action
 {
-    public class ForecastAction : IForecastAction
+    public class ForecastAction 
     {
-        private readonly ITrialGenerator trials;
-        private readonly IForecastSummarizer forecast;
+        private readonly TrialGenerator trials;
+        private readonly ForecastSummarizer forecast;
 
-        public ForecastAction(ITrialGenerator trials, IForecastSummarizer forecast)
+        public ForecastAction(TrialGenerator trials, ForecastSummarizer forecast)
         {
             if (trials == null)
                 throw new ArgumentNullException(nameof(trials));
@@ -23,7 +23,7 @@ namespace Forecaster.Core.Action
             this.forecast = forecast;
         }
 
-        public IEnumerable<Bucket> Execute(IForecastArguments arguments)
+        public virtual IEnumerable<Bucket> Execute(IForecastArguments arguments)
         {
             if (arguments == null)
                 throw new ArgumentNullException(nameof(arguments));

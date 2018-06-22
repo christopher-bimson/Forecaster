@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Forecaster.Core.Model.Summary
 {
-    public class ForecastSummarizer : IForecastSummarizer
+    public class ForecastSummarizer
     {
-        public IEnumerable<Bucket> Summarize(Trials trials)
+        public virtual IEnumerable<Bucket> Summarize(Trials trials)
         {
             var targetBucketCount = GetNumberOfBuckets(trials);
             var bucketSize = GetSizeOfBuckets(trials, targetBucketCount);

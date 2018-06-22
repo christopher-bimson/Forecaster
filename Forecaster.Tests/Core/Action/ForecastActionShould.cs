@@ -11,8 +11,8 @@ namespace Forecaster.Tests.Core.Action
 {
     public class ForecastActionShould
     {
-        private ITrialGenerator TrialsMock = Substitute.For<ITrialGenerator>();
-        private IForecastSummarizer ForecastMock = Substitute.For<IForecastSummarizer>();
+        private TrialGenerator TrialsMock = Substitute.For<TrialGenerator>(Substitute.For<IRng>());
+        private ForecastSummarizer ForecastMock = Substitute.For<ForecastSummarizer>();
 
 
         [Fact]

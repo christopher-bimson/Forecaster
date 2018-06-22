@@ -17,15 +17,17 @@ namespace Forecaster
 
             var program = new Program(new ParserAdapter(), Console.Out, forecastAction, 
                 new RendererFactory(Console.Out));
+
             program.Run(args);
         }
 
         private readonly ParserAdapter parser;
-        private readonly IForecastAction forecastAction;
+        private readonly ForecastAction forecastAction;
         private readonly RendererFactory rendererFactory;
         private readonly TextWriter stdOut;
 
-        public Program(ParserAdapter parser, TextWriter stdOut,  IForecastAction forecastAction, RendererFactory rendererFactory)
+        public Program(ParserAdapter parser, TextWriter stdOut,  ForecastAction forecastAction, 
+            RendererFactory rendererFactory)
         {
             this.parser = parser;
             this.forecastAction = forecastAction;
