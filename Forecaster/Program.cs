@@ -4,6 +4,7 @@ using Forecaster.Core.Action;
 using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
 using System;
+using System.IO;
 
 namespace Forecaster
 {
@@ -14,19 +15,22 @@ namespace Forecaster
             var forecastAction = new ForecastAction(new TrialGenerator(new RandomRng()),
                 new ForecastSummarizer());
 
-            var program = new Program(new ParserAdapter(), forecastAction, new RendererFactory(Console.Out));
+            var program = new Program(new ParserAdapter(), Console.Out, forecastAction, 
+                new RendererFactory(Console.Out));
             program.Run(args);
         }
 
         private readonly ParserAdapter parser;
         private readonly IForecastAction forecastAction;
         private readonly RendererFactory rendererFactory;
+        private readonly TextWriter stdOut;
 
-        public Program(ParserAdapter parser, IForecastAction forecastAction, RendererFactory rendererFactory)
+        public Program(ParserAdapter parser, TextWriter stdOut,  IForecastAction forecastAction, RendererFactory rendererFactory)
         {
             this.parser = parser;
             this.forecastAction = forecastAction;
             this.rendererFactory = rendererFactory;
+            this.stdOut = stdOut;
         }
 
         public void Run(string[] args)
@@ -34,9 +38,13 @@ namespace Forecaster
             var parserResult = parser.Parse(args);
             if (parserResult.IsSuccess)
             {
-                var summarizedForecast = forecastAction.Execute(parserResult.Success);
-                var renderer = rendererFactory.CreateFor(parserResult.Success.Output);
+                var summarizedForecast = forecastAction.Execute(parserResult.SuccessResult);
+                var renderer = rendererFactory.CreateFor(parserResult.SuccessResult.Output);
                 renderer.Render(summarizedForecast);
+            }
+            else
+            {
+                stdOut.Write(parserResult.FailResult);
             }
         }
     }

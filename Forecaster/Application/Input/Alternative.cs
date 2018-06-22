@@ -2,19 +2,19 @@
 {
     public class Alternative<THappyPath, TSadPath>
     {
-        public THappyPath Success { get; private set; }
-        public TSadPath Failure { get; private set; }
+        public THappyPath SuccessResult { get; private set; }
+        public TSadPath FailResult { get; private set; }
         public bool IsSuccess { get; private set; }
 
         public Alternative(THappyPath success)
         {
-            Success = success;
+            SuccessResult = success;
             IsSuccess = true;
         }
 
         public Alternative(TSadPath failure)
         {
-            Failure = failure;
+            FailResult = failure;
             IsSuccess = false;
         }
     }

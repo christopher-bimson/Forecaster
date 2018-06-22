@@ -20,10 +20,10 @@ namespace Forecaster.Tests.Application.Input
             var result = adaptor.Parse(args.Split(' '));
 
             result.IsSuccess.Should().BeTrue();
-            result.Success.Samples.Should().BeEquivalentTo(expectedSamples);
-            result.Success.Forecast.Should().Be(expectedForecast);
-            result.Success.Trials.Should().Be(expectedTrials);
-            result.Success.Output.Should().Be(expectedOutputFormat);
+            result.SuccessResult.Samples.Should().BeEquivalentTo(expectedSamples);
+            result.SuccessResult.Forecast.Should().Be(expectedForecast);
+            result.SuccessResult.Trials.Should().Be(expectedTrials);
+            result.SuccessResult.Output.Should().Be(expectedOutputFormat);
         }
 
         [Theory]

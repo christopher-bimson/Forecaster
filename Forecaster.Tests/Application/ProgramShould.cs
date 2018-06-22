@@ -13,6 +13,7 @@ namespace Forecaster.Tests.Application
 {
     public class ProgramShould
     {
+        private readonly TextWriter stdOut = Substitute.For<TextWriter>();
         private readonly ParserAdapter parser = Substitute.For<ParserAdapter>();
         private readonly IForecastAction forecastAction = Substitute.For<IForecastAction>();
         private readonly RendererFactory rendererFactory = Substitute.For<RendererFactory>(Substitute.For<TextWriter>());
@@ -30,18 +31,33 @@ namespace Forecaster.Tests.Application
             };
             var forecast = new Bucket[] { new Bucket(100, 1) };
 
-            parser.Parse(args).Returns(new Alternative<Options, IEnumerable<Error>>(parsedArguments));
+            parser.Parse(args).Returns(new Alternative<Options, string>(parsedArguments));
             forecastAction.Execute(parsedArguments).Returns(forecast);
             rendererFactory.CreateFor(parsedArguments.Output).Returns(renderer);
             
-
-            var program = new Program(parser, forecastAction, rendererFactory);
+            var program = new Program(parser, stdOut, forecastAction, rendererFactory);
             program.Run(args);
 
             parser.Received().Parse(args);
             forecastAction.Received().Execute(parsedArguments);
             rendererFactory.Received().CreateFor(parsedArguments.Output);
             renderer.Received().Render(forecast);
+        }
+
+        [Fact]
+        public void Prints_Some_Help_Text_When_Arguments_Are_Invalid()
+        {
+            var args = "well this is clearly nonsense".Split(' ');
+            var helpText = "you are doing it wrong.";
+            parser.Parse(args).Returns(new Alternative<Options, string>(helpText));
+
+            var program = new Program(parser, stdOut, forecastAction, rendererFactory);
+            program.Run(args);
+
+            forecastAction.DidNotReceive().Execute(Arg.Any<IForecastArguments>());
+            rendererFactory.DidNotReceive().CreateFor(Arg.Any<OutputFormat>());
+            stdOut.Received().Write(helpText);
+
         }
     }
 }
