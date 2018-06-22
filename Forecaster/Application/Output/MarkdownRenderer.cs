@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using BetterConsoleTables;
-using Forecaster.Core.Model.Summary;
 
 namespace Forecaster.Application.Output
 {
