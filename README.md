@@ -37,7 +37,7 @@ Copyright (C) 2018 Forecaster
                         will contribute to the forecast.
 
   -o, --outputFormat    (Default: Pretty) The output format of the forecast.
-                        Valid values are: Pretty, Markdown and JSON.
+                        Valid values are: Pretty, Markdown, JSON and CSV.
 
   --help                Display this help screen.
 

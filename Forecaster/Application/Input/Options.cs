@@ -12,7 +12,7 @@ namespace Forecaster.Application.Input
             internal const string Samples = "Sample data points of the value you want to forecast.";
             internal const string Forecast = "The number of data points 'ahead' to forecast.";
             internal const string Trials = "The number of trials to use to build the forecast. Each trial is a 'potential future' that will contribute to the forecast.";
-            internal const string Output = "The output format of the forecast. Valid values are: Pretty, Markdown and JSON."; 
+            internal const string Output = "The output format of the forecast. Valid values are: Pretty, Markdown, JSON and CSV."; 
         }
 
         [Option('s', "samples", Required = true, Min = 1, HelpText = Help.Samples)]
