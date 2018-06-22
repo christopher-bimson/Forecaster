@@ -9,18 +9,18 @@ namespace Forecaster.Core.Model.Summary
     {
         public IEnumerable<Bucket> Summarize(Trials trials)
         {
-            var bucketCount = GetNumberOfBuckets(trials);
-            int bucketSize = GetSizeOfBuckets(trials, bucketCount);
+            var targetBucketCount = GetNumberOfBuckets(trials);
+            var bucketSize = GetSizeOfBuckets(trials, targetBucketCount);
 
-            var buckets = new List<Bucket>();
+            var buckets = new Buckets();
             var threshold = GetStartingThreshold(trials.Min, bucketSize);
             do
             {
                 threshold += bucketSize;
                 var likelihood = trials.CalculateLikelihoodOf(threshold);
-                if (likelihood > 0)
-                    yield return new Bucket(likelihood, threshold);
+                buckets.Add(likelihood, threshold);
             } while (AreLikelihoodsToCalculate(trials.Max, threshold));
+            return buckets;
         }
 
         private static int GetStartingThreshold(double trialsMin, int bucketSize)

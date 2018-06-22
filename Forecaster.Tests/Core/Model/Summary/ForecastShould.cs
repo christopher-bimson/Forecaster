@@ -12,7 +12,7 @@ namespace Forecaster.Tests.Core.Model.Summary
         public void Summarize_10_Trials_Incrementing_By_10_Into_10_Bands()
         {
             var trialData = new double[] { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-            var expectedBands = new[] {
+            var expected = new[] {
                 new Bucket(10, 100),
                 new Bucket(20, 90),
                 new Bucket(30, 80),
@@ -25,18 +25,17 @@ namespace Forecaster.Tests.Core.Model.Summary
                 new Bucket(100, 10),
             };
 
+            var summarizer = new ForecastSummarizer();
+            var summary = summarizer.Summarize(trialData);
 
-            var forecast = new ForecastSummarizer();
-            var bands = forecast.Summarize(trialData);
-
-            bands.Should().BeEquivalentTo(expectedBands);
+            summary.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Summarize_5_Trials_Incrementing_By_10_Into_10_Bands()
         {
             var trialData = new double[] { 20, 40, 60, 80, 100 };
-            var expectedBands = new[] {
+            var expected = new[] {
                 new Bucket(20, 100),
                 new Bucket(40, 80),
                 new Bucket(60, 60),
@@ -44,10 +43,10 @@ namespace Forecaster.Tests.Core.Model.Summary
                 new Bucket(100, 20),
             };
 
-            var forecast = new ForecastSummarizer();
-            var bands = forecast.Summarize(trialData);
+            var summarizer = new ForecastSummarizer();
+            var summary = summarizer.Summarize(trialData);
 
-            bands.Should().BeEquivalentTo(expectedBands);
+            summary.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
@@ -55,7 +54,7 @@ namespace Forecaster.Tests.Core.Model.Summary
         {
             var list = Enumerable.Range(1, 5000).ToList();
             list.AddRange(Enumerable.Range(1, 5000));
-            var expectedBands = new[] {
+            var expected = new[] {
                 new Bucket(90.02m, 500),
                 new Bucket(80.02m, 1000),
                 new Bucket(70.02m, 1500),
@@ -68,28 +67,27 @@ namespace Forecaster.Tests.Core.Model.Summary
                 new Bucket(0.02m, 5000),
             };
 
-            var forecast = new ForecastSummarizer();
-            var bands = forecast.Summarize(list.ConvertAll(x => (double)x).ToArray());
+            var summarizer = new ForecastSummarizer();
+            var summary = summarizer.Summarize(list.ConvertAll(x => (double)x).ToArray());
 
-            bands.Should().BeEquivalentTo(expectedBands);
+            summary.Should().BeEquivalentTo(expected);
         }
 
         [Fact]
         public void Reasonably_Approximate_The_Worked_Example_From_The_Blog()
         {
             var data = new double[] { 76, 59, 61, 49, 60 };
-            var expectedBuckets = new[]
+            var expected = new[]
             {
                 new Bucket(100m, 49),
                 new Bucket(80m, 56),
                 new Bucket(20m, 70),
-                new Bucket(20m, 63),
             };
 
-            var forecast = new ForecastSummarizer();
-            var summary = forecast.Summarize(data);
+            var summarizer = new ForecastSummarizer();
+            var summary = summarizer.Summarize(data);
 
-            summary.Should().BeEquivalentTo(expectedBuckets);
+            summary.Should().BeEquivalentTo(expected);
         }
     }
 }
