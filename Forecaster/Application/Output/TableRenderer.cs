@@ -21,7 +21,7 @@ namespace Forecaster.Application.Output
             table.Config = GetTableConfig();
             foreach (var bucket in summarizedForecast.OrderByDescending(b => b.Likelihood))
             {
-                table.AddRow(bucket.Likelihood, bucket.Value);
+                table.AddRow(bucket.Likelihood, bucket.Forecast);
             }
             writer.Write(table.ToStringWithoutExcessiveWhitespace());
         }

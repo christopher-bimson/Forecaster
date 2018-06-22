@@ -24,7 +24,7 @@ namespace Forecaster.Tests.Core.Model.Summary
             buckets.Add(75, 50);
             buckets.Add(75, 60);
 
-            buckets.Should().ContainSingle(b => b.Value == 60);
+            buckets.Should().ContainSingle(b => b.Forecast == 60);
         }
     }
 }

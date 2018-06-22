@@ -5,12 +5,12 @@
         public Bucket(decimal likelihood, double value) : this()
         {
             Likelihood = likelihood;
-            Value = value;
+            Forecast = value;
         }
 
         public decimal Likelihood { get; private set; }
 
-        public double Value { get; private set; }
+        public double Forecast { get; private set; }
 
         public override bool Equals(object obj)
         {
@@ -20,14 +20,14 @@
             var other = (Bucket)obj;
 
             return other.Likelihood == Likelihood &&
-                other.Value == Value;
+                other.Forecast == Forecast;
         }
 
         public override int GetHashCode()
         {
             var hashCode = 2013874805;
             hashCode = hashCode * -1521134295 + Likelihood.GetHashCode();
-            hashCode = hashCode * -1521134295 + Value.GetHashCode();
+            hashCode = hashCode * -1521134295 + Forecast.GetHashCode();
             return hashCode;
         }
     }
