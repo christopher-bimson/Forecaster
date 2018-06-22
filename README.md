@@ -1,37 +1,45 @@
 # Forecaster
-It's a simple console application that will create a projection of future progress based on your past progress and a simple monte carlo simulation. The big win is that the projection is a number of possible values with a 'likelihood' score for each.
+Forecaster is  a simple .NET Core console application that can create a forecast of the future value of some variable using
+some historic data points and a monte carlo simultion.
 
-[FocusedObjective.Resources](https://github.com/FocusedObjective/FocusedObjective.Resources) was handy putting this together, and contains a lot of useful resources on this topic that are well worth looking at.
+The original purpose of this application was to forecast the mid-to-long term progress of a software development
+team using it's historic throughput, as a less wasteful an more accurate alternative to estimation. See my original 
+[blog post](https://christopher-bimson.github.io/2017-04-19-forecaster/) for more information.
+ 
+[FocusedObjective](https://github.com/FocusedObjective/FocusedObjective.Resources) was very
+useful when originally putting this together, and contains a lot of useful resources on this topic that are well worth looking at.
+
+I've subsequently used this to forecast other things, so during the port to .NET Core the language of 
+the interface became a bit more general.
 
 ## Build
-At the moment it is a straight solution build using Visual Studio 2015.
+```
+dotnet build Forecaster.sln
+```
+
+Or use your favourite IDE.
 
 ## Usage
 ```
-Forecaster 1.0.0.0
+dotnet Forecaster.dll --help
 
-  -h, --historicThroughput    Required. An array of numeric values that
-                              represent throughput in some work unit (e.g.
-                              story points, story count, ideal hours -
-                              abbreviated WU) / time period (e.g. week,
-                              iteration, month).
+Forecaster 1.0.0
+Copyright (C) 2018 Forecaster
 
-  -p, --periodsToForecast     Required. The number of time periods to forecast.
-                              Must be a positive value.
+  -s, --samples         Required. Sample data points of the value you want to
+                        forecast.
 
-  -t, --numberOfTrials        (Default: 100000) The number of trials (consider
-                              a trial to be a 'potential future') to use when
-                              calculating the forecast.
+  -f, --forecast        Required. The number of data points 'ahead' to
+                        forecast.
 
-  -o, --outputFormat          (Default: Pretty) The format to use when
-                              outputting results. Choose from Pretty, Json and
-                              CSV.
+  -t, --trials          (Default: 100000) The number of trials to use to build
+                        the forecast. Each trial is a 'potential future' that
+                        will contribute to the forecast.
+
+  -o, --outputFormat    (Default: Pretty) The output format of the forecast.
+                        Valid values are: Pretty, Markdown and JSON.
+
+  --help                Display this help screen.
+
+  --version             Display version information.
 ```
-## Tests
-Um. There aren't any. Yet. Lazy on my part. Mea Culpa.
-
-## Performance
-I'm sure this is nowhere near as performant as it could be, but it appears to be adequate for now. The code is optimized for ease of understanding and reasoning about rather than raw performance.
-
-
-
