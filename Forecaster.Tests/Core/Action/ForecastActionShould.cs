@@ -11,7 +11,7 @@ namespace Forecaster.Tests.Core.Action
 {
     public class ForecastActionShould
     {
-        private ITrials TrialsMock = Substitute.For<ITrials>();
+        private ITrialGenerator TrialsMock = Substitute.For<ITrialGenerator>();
         private IForecastSummarizer ForecastMock = Substitute.For<IForecastSummarizer>();
 
 
@@ -19,7 +19,7 @@ namespace Forecaster.Tests.Core.Action
         public void Generate_A_Forecast_From_Valid_Arguments()
         {
             IForecastArguments arguments = new TestForecastArguments(new[] { 5.0, 5.0, 5.0 }, 5, 1000);
-            var fakeTrials = new double[] { 1, 2, 3, 4, 5 };
+            Trials fakeTrials = new double[] { 1, 2, 3, 4, 5 };
             var fakeForecast = new Bucket[] { new Bucket(100.0m, 1) };
 
             TrialsMock.GenerateFrom(arguments).Returns(fakeTrials);

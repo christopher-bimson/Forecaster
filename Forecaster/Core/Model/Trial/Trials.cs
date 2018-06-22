@@ -1,28 +1,69 @@
-﻿using Forecaster.Core.Model.Action;
-using System;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Forecaster.Core.Model.Trial
 {
-    public class Trials : ITrials
+    public class Trials : IEnumerable<double>
     {
-        private readonly IRng rng;
-
-        public Trials(IRng rng)
+        public static implicit operator double[] (Trials t)
         {
-            this.rng = rng;
+            return t.ToArray();
         }
 
-        public double[] GenerateFrom(IForecastArguments arguments)
+        public static implicit operator Trials(double[] data)
         {
-            var result = new double[arguments.TrialCount];
-            for(int i = 0; i < result.Length; i++)
+            return new Trials(data);
+        }
+
+        private readonly double[] data;
+
+        public int Count => data.Length;
+
+        public double this[int index]
+        {
+            get
             {
-                result[i] = arguments.Samples
-                    .SampleWithReplacement(arguments.Forecast, rng)
-                    .Sum();
+                return data[index];
             }
-            return result;
+        }
+
+        public double Max
+        {
+            get; private set;
+        }
+
+        public double Min
+        {
+            get; private set;
+        }
+
+        public Trials(IEnumerable<double> data)
+        {
+            this.data = data.ToArray();
+            Max = data.Max();
+            Min = data.Min();
+        }
+
+        public IEnumerator<double> GetEnumerator()
+        {
+            return data.AsQueryable().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return data.GetEnumerator();
+        }
+
+        public decimal CalculateLikelihoodOf(double value)
+        {
+            return Math.Round((ThatMeetOrExceed(value) / (decimal)Count) * 100, 2);
+        }
+
+        private int ThatMeetOrExceed(double value)
+        {
+            return data.Where(t => t >= value).Count();
         }
     }
 }

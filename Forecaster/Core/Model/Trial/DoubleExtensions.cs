@@ -4,7 +4,7 @@ namespace System
 {
     public static class DoubleExtensions
     {
-        public static double[] SampleWithReplacement(this double[] samples, int count, 
+        public static double[] PickWithReplacement(this double[] samples, int count, 
             IRng rng)
         {
             var result = new double[count];

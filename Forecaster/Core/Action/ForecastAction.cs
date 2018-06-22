@@ -8,10 +8,10 @@ namespace Forecaster.Core.Action
 {
     public class ForecastAction : IForecastAction
     {
-        private readonly ITrials trials;
+        private readonly ITrialGenerator trials;
         private readonly IForecastSummarizer forecast;
 
-        public ForecastAction(ITrials trials, IForecastSummarizer forecast)
+        public ForecastAction(ITrialGenerator trials, IForecastSummarizer forecast)
         {
             if (trials == null)
                 throw new ArgumentNullException(nameof(trials));

@@ -12,7 +12,7 @@ namespace Forecaster.Tests.Core.Model
             var rng = new RepeatingRng(new[] { 0, 1, 2, 3, 4 });
             
             var samples = new[] { 1.0, 2.0, 3.0, 4.0, 5.0 };
-            var picked = samples.SampleWithReplacement(5, rng);
+            var picked = samples.PickWithReplacement(5, rng);
 
             picked.Should().BeEquivalentTo(picked);
         }

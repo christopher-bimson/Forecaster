@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Forecaster.Core.Model.Trial;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,24 +7,20 @@ namespace Forecaster.Core.Model.Summary
 {
     public class ForecastSummarizer : IForecastSummarizer
     {
-        public IEnumerable<Bucket> Summarize(double[] trials)
+        public IEnumerable<Bucket> Summarize(Trials trials)
         {
-            double trialsMin = trials.Min();
-            double trialsMax = trials.Max();
-            int trialCount = trials.Length;
-
             var bucketCount = GetNumberOfBuckets(trials);
-            int bucketSize = GetSizeOfBuckets(trialsMin, trialsMax, bucketCount);
+            int bucketSize = GetSizeOfBuckets(trials, bucketCount);
 
             var buckets = new List<Bucket>();
-            var threshold = GetStartingThreshold(trialsMin, bucketSize);
+            var threshold = GetStartingThreshold(trials.Min, bucketSize);
             do
             {
                 threshold += bucketSize;
-                var likelihood = CalculateLikelihood(trialCount, TrialsThatMeetThreshold(trials, threshold));
+                var likelihood = trials.CalculateLikelihoodOf(threshold);
                 if (likelihood > 0)
                     yield return new Bucket(likelihood, threshold);
-            } while (ThereAreStillBucketsToSummarize(trialsMax, threshold));
+            } while (AreLikelihoodsToCalculate(trials.Max, threshold));
         }
 
         private static int GetStartingThreshold(double trialsMin, int bucketSize)
@@ -31,24 +28,14 @@ namespace Forecaster.Core.Model.Summary
             return Math.Max(0, Convert.ToInt32(trialsMin - bucketSize));
         }
 
-        private static int TrialsThatMeetThreshold(double[] trials, int bucketThreshold)
-        {
-            return trials.Where(t => t >= bucketThreshold).Count();
-        }
-
-        private static decimal CalculateLikelihood(int totalTrials, int relevantTrials)
-        {
-            return Math.Round((relevantTrials / (decimal)totalTrials) * 100, 2);
-        }
-
-        private static bool ThereAreStillBucketsToSummarize(double biggestTrial, int bucketThreshold)
+        private static bool AreLikelihoodsToCalculate(double biggestTrial, int bucketThreshold)
         {
             return bucketThreshold <= biggestTrial;
         }
 
-        private static int GetSizeOfBuckets(double min, double max, int bucketCount)
+        private static int GetSizeOfBuckets(Trials trials, int bucketCount)
         {
-            var diff = max - min;
+            var diff = trials.Max - trials.Min;
 
             if (diff == 0)
                 return 1;

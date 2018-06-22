@@ -11,7 +11,7 @@ namespace Forecaster
     {
         public static void Main(string[] args)
         {
-            var forecastAction = new ForecastAction(new Trials(new RandomRng()),
+            var forecastAction = new ForecastAction(new TrialGenerator(new RandomRng()),
                 new ForecastSummarizer());
 
             var program = new Program(new ParserAdapter(), forecastAction, new RendererFactory(Console.Out));

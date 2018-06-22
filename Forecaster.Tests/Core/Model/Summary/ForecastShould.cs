@@ -80,11 +80,10 @@ namespace Forecaster.Tests.Core.Model.Summary
             var data = new double[] { 76, 59, 61, 49, 60 };
             var expectedBuckets = new[]
             {
-                new Bucket(100m, 40),
-                new Bucket(80m, 50),
-                new Bucket(60m, 60),
+                new Bucket(100m, 49),
+                new Bucket(80m, 56),
                 new Bucket(20m, 70),
-                new Bucket(0m, 80),
+                new Bucket(20m, 63),
             };
 
             var forecast = new ForecastSummarizer();
