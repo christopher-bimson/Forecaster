@@ -1,6 +1,6 @@
 # Forecaster
 Forecaster is  a simple .NET Core console application that can create a forecast of the future value of some variable using
-some historic data points and a monte carlo simultion.
+some historic data points and a Monte Carlo simulation.
 
 The original purpose of this application was to forecast the mid-to-long term progress of a software development
 team using it's historic throughput, as a less wasteful an more accurate alternative to estimation. See my original 
