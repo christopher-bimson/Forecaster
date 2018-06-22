@@ -21,11 +21,11 @@ namespace Forecaster.Tests.Application.Output
             };
 
             var expected =
-                           "| Likelihood | At Least |" + Environment.NewLine +
-                           "|------------|----------|" + Environment.NewLine +
-                           "| 95         | 35       |" + Environment.NewLine +
-                           "| 80         | 28       |" + Environment.NewLine +
-                           "| 50         | 17       |" + Environment.NewLine;
+                           "| Forecast | Likelihood |" + Environment.NewLine +
+                           "|----------|------------|" + Environment.NewLine +
+                           "| 35       | 95         |" + Environment.NewLine +
+                           "| 28       | 80         |" + Environment.NewLine +
+                           "| 17       | 50         |" + Environment.NewLine;
 
             var markdownRenderer = new MarkdownRenderer(writer);
             markdownRenderer.Render(summary);

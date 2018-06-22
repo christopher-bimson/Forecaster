@@ -20,15 +20,15 @@ namespace Forecaster.Tests.Application.Output
                 new Bucket(50, 17)
             };
 
-            var expected = "+------------+----------+" + Environment.NewLine +
-                           "| Likelihood | At Least |" + Environment.NewLine +
-                           "+------------+----------+" + Environment.NewLine +
-                           "| 95         | 35       |" + Environment.NewLine +
-                           "+------------+----------+" + Environment.NewLine +
-                           "| 80         | 28       |" + Environment.NewLine +
-                           "+------------+----------+" + Environment.NewLine +
-                           "| 50         | 17       |" + Environment.NewLine +
-                           "+------------+----------+" + Environment.NewLine;
+            var expected = "+----------+------------+" + Environment.NewLine +
+                           "| Forecast | Likelihood |" + Environment.NewLine +
+                           "+----------+------------+" + Environment.NewLine +
+                           "| 35       | 95         |" + Environment.NewLine +
+                           "+----------+------------+" + Environment.NewLine +
+                           "| 28       | 80         |" + Environment.NewLine +
+                           "+----------+------------+" + Environment.NewLine +
+                           "| 17       | 50         |" + Environment.NewLine +
+                           "+----------+------------+" + Environment.NewLine;
 
             var prettyRenderer = new PrettyRenderer(writer);
             prettyRenderer.Render(summary);

@@ -16,7 +16,7 @@ namespace Forecaster.Application.Output
 
         public void Render(IEnumerable<Bucket> summarizedForecast)
         {
-            writer.Write(JsonConvert.SerializeObject(summarizedForecast));
+            writer.Write(JsonConvert.SerializeObject(summarizedForecast, Formatting.Indented));
         }
     }
 }

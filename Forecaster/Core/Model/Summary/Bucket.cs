@@ -2,10 +2,10 @@
 {
     public struct Bucket
     {
-        public Bucket(decimal likelihood, double value) : this()
+        public Bucket(decimal likelihood, double forecast) : this()
         {
             Likelihood = likelihood;
-            Forecast = value;
+            Forecast = forecast;
         }
 
         public decimal Likelihood { get; private set; }

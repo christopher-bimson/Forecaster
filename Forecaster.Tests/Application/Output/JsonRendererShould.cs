@@ -4,6 +4,7 @@ using Forecaster.Core.Model.Summary;
 using Newtonsoft.Json;
 using NSubstitute;
 using System.IO;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Forecaster.Tests.Application.Output
@@ -24,12 +25,12 @@ namespace Forecaster.Tests.Application.Output
             var jsonRenderer = new JsonRenderer(writer);
             jsonRenderer.Render(summary);
 
-            writer.Received().Write(Arg.Is<string>(s => DeserializesTo(s, summary)));
+            writer.Received().Write(Arg.Is<string>(json => DeserializesTo(json, summary)));
         }
 
-        private bool DeserializesTo(string s, Bucket[] summary)
+        private bool DeserializesTo(string json, Bucket[] summary)
         {
-            var deserializedSummary = JsonConvert.DeserializeObject<Bucket[]>(s);
+            var deserializedSummary = JsonConvert.DeserializeObject<IEnumerable<Bucket>>(json);
             deserializedSummary.Should().BeEquivalentTo(summary);
             return true;
         }

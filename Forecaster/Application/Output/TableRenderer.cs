@@ -17,11 +17,11 @@ namespace Forecaster.Application.Output
 
         public void Render(IEnumerable<Bucket> summarizedForecast)
         {
-            var table = new Table("Likelihood", "At Least");
+            var table = new Table("Forecast", "Likelihood");
             table.Config = GetTableConfig();
             foreach (var bucket in summarizedForecast.OrderByDescending(b => b.Likelihood))
             {
-                table.AddRow(bucket.Likelihood, bucket.Forecast);
+                table.AddRow(bucket.Forecast, bucket.Likelihood);
             }
             writer.Write(table.ToStringWithoutExcessiveWhitespace());
         }
