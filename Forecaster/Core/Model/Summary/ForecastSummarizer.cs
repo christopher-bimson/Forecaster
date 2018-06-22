@@ -16,26 +16,24 @@ namespace Forecaster.Core.Model.Summary
             int bucketSize = GetSizeOfBuckets(trialsMin, trialsMax, bucketCount);
 
             var buckets = new List<Bucket>();
-            var bucketThreshold = GetThresholdLowerBound(trialsMin, bucketSize);
+            var threshold = GetStartingThreshold(trialsMin, bucketSize);
             do
             {
-                bucketThreshold += bucketSize;
-                var relevantTrials = GetCountOfTrialsLargerThanBucket(trials, bucketThreshold);
-                if (relevantTrials > 0)
-                    yield return new Bucket(CalculateLikelihood(trialCount, relevantTrials), bucketThreshold);
-                else
-                    yield break;
-            } while (bucketThreshold <= trialsMax);
+                threshold += bucketSize;
+                var likelihood = CalculateLikelihood(trialCount, TrialsThatMeetThreshold(trials, threshold));
+                if (likelihood > 0)
+                    yield return new Bucket(likelihood, threshold);
+            } while (ThereAreStillBucketsToSummarize(trialsMax, threshold));
         }
 
-        private static int GetThresholdLowerBound(double trialsMin, int bucketSize)
+        private static int GetStartingThreshold(double trialsMin, int bucketSize)
         {
             return Math.Max(0, Convert.ToInt32(trialsMin - bucketSize));
         }
 
-        private static int GetCountOfTrialsLargerThanBucket(double[] trials, int bucketValue)
+        private static int TrialsThatMeetThreshold(double[] trials, int bucketThreshold)
         {
-            return trials.Where(t => t >= bucketValue).Count();
+            return trials.Where(t => t >= bucketThreshold).Count();
         }
 
         private static decimal CalculateLikelihood(int totalTrials, int relevantTrials)
@@ -43,9 +41,9 @@ namespace Forecaster.Core.Model.Summary
             return Math.Round((relevantTrials / (decimal)totalTrials) * 100, 2);
         }
 
-        private static bool ThereAreStillBucketsToSummarize(double biggestTrial, int bucketValue)
+        private static bool ThereAreStillBucketsToSummarize(double biggestTrial, int bucketThreshold)
         {
-            return bucketValue <= biggestTrial;
+            return bucketThreshold <= biggestTrial;
         }
 
         private static int GetSizeOfBuckets(double min, double max, int bucketCount)

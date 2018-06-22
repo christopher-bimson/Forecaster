@@ -73,5 +73,24 @@ namespace Forecaster.Tests.Core.Model.Summary
 
             bands.Should().BeEquivalentTo(expectedBands);
         }
+
+        [Fact]
+        public void Reasonably_Approximate_The_Worked_Example_From_The_Blog()
+        {
+            var data = new double[] { 76, 59, 61, 49, 60 };
+            var expectedBuckets = new[]
+            {
+                new Bucket(100m, 40),
+                new Bucket(80m, 50),
+                new Bucket(60m, 60),
+                new Bucket(20m, 70),
+                new Bucket(0m, 80),
+            };
+
+            var forecast = new ForecastSummarizer();
+            var summary = forecast.Summarize(data);
+
+            summary.Should().BeEquivalentTo(expectedBuckets);
+        }
     }
 }
