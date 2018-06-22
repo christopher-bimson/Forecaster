@@ -4,6 +4,7 @@
     {
         Pretty,
         Json,
-        Markdown
+        Markdown,
+        Csv
     }
 }

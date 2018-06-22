@@ -20,6 +20,8 @@ namespace Forecaster.Application.Output
                     return new JsonRenderer(writer);
                 case OutputFormat.Markdown:
                     return new MarkdownRenderer(writer);
+                case OutputFormat.Csv:
+                    return new CsvRenderer(writer);
                 default:
                     return new PrettyRenderer(writer);
             }

@@ -14,6 +14,7 @@ namespace Forecaster.Tests.Application.Output
         [InlineData(OutputFormat.Pretty, typeof(PrettyRenderer))]
         [InlineData(OutputFormat.Json, typeof(JsonRenderer))]
         [InlineData(OutputFormat.Markdown, typeof(MarkdownRenderer))]
+        [InlineData(OutputFormat.Csv, typeof(CsvRenderer))]
         public void Create_The_Correct_Type_Of_Renderer(OutputFormat outputFormat, 
             Type expectedRenderer)
         {
