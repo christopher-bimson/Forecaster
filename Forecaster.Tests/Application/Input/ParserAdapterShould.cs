@@ -12,7 +12,7 @@ namespace Forecaster.Tests.Application.Input
         [InlineData("-s 1 2 3 -f 5 -t 1000 -o markdown",
             new[] { 1.0, 2.0, 3.0 }, 5, 1000, OutputFormat.Markdown)]
         [InlineData("--samples 1 2 3 -f 5",
-            new[] { 1.0, 2.0, 3.0 }, 5, 10000, OutputFormat.Pretty)]
+            new[] { 1.0, 2.0, 3.0 }, 5, 100000, OutputFormat.Pretty)]
         public void Parse_Syntactically_Valid_Options(string args, double[] expectedSamples, 
             int expectedForecast, int expectedTrials, OutputFormat expectedOutputFormat)
         {
