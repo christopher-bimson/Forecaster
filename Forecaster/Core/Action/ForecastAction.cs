@@ -1,5 +1,4 @@
-﻿using Forecaster.Core.Model.Action;
-using Forecaster.Core.Model.Summary;
+﻿using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
 using System;
 using System.Collections.Generic;

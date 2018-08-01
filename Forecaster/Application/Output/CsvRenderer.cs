@@ -8,7 +8,7 @@ namespace Forecaster.Application.Output
 {
     public class CsvRenderer : IRenderer
     {
-        private TextWriter writer;
+        private readonly TextWriter writer;
 
         public CsvRenderer(TextWriter writer)
         {

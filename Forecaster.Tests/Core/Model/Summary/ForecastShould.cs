@@ -32,7 +32,7 @@ namespace Forecaster.Tests.Core.Model.Summary
         }
 
         [Fact]
-        public void Summarize_5_Trials_Incrementing_By_10_Into_10_Bands()
+        public void Summarize_5_Trials_Incrementing_By_10_Into_5_Bands()
         {
             var trialData = new double[] { 20, 40, 60, 80, 100 };
             var expected = new[] {
@@ -73,8 +73,11 @@ namespace Forecaster.Tests.Core.Model.Summary
             summary.Should().BeEquivalentTo(expected);
         }
 
+        /// <remarks>
+        /// https://christopher-bimson.github.io/blog/2017/04/19/forecaster
+        /// </remarks>
         [Fact]
-        public void Reasonably_Approximate_The_Worked_Example_From_The_Blog()
+        public void Reasonably_Approximate_The_Worked_Example_From_The_Forecaster_Blog()
         {
             var data = new double[] { 76, 59, 61, 49, 60 };
             var expected = new[]

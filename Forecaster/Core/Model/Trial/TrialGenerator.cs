@@ -1,6 +1,6 @@
-﻿using Forecaster.Core.Model.Action;
-using System;
+﻿using System;
 using System.Linq;
+using Forecaster.Core.Action;
 
 namespace Forecaster.Core.Model.Trial
 {

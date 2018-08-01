@@ -1,13 +1,10 @@
-﻿using FluentAssertions;
-using Forecaster.Core.Model;
+﻿using System.Linq;
+using FluentAssertions;
 using Forecaster.Core.Model.Trial;
 using Forecaster.Tests.Core.Action;
-using NSubstitute;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
-namespace Forecaster.Tests.Core.Model
+namespace Forecaster.Tests.Core.Model.Trial
 {
     public class TrialGeneratorShould
     {

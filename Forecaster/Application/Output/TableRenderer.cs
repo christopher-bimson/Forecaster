@@ -8,11 +8,11 @@ namespace Forecaster.Application.Output
 {
     public abstract class TableRenderer : IRenderer
     {
-        protected readonly TextWriter writer;
+        protected readonly TextWriter Writer;
 
         public TableRenderer(TextWriter writer)
         {
-            this.writer = writer;
+            this.Writer = writer;
         }
 
         public void Render(IEnumerable<Bucket> summarizedForecast)
@@ -23,7 +23,7 @@ namespace Forecaster.Application.Output
             {
                 table.AddRow(bucket.Forecast, bucket.Likelihood);
             }
-            writer.Write(table.ToStringWithoutExcessiveWhitespace());
+            Writer.Write(table.ToStringWithoutExcessiveWhitespace());
         }
 
         protected abstract TableConfiguration GetTableConfig();

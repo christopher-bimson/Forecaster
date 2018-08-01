@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Forecaster.Core.Action;
-using Forecaster.Core.Model.Action;
 using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
 using NSubstitute;
@@ -11,8 +10,8 @@ namespace Forecaster.Tests.Core.Action
 {
     public class ForecastActionShould
     {
-        private TrialGenerator TrialsMock = Substitute.For<TrialGenerator>(Substitute.For<IRng>());
-        private ForecastSummarizer ForecastMock = Substitute.For<ForecastSummarizer>();
+        private readonly TrialGenerator TrialsMock = Substitute.For<TrialGenerator>(Substitute.For<IRng>());
+        private readonly ForecastSummarizer ForecastMock = Substitute.For<ForecastSummarizer>();
 
 
         [Fact]
@@ -20,7 +19,7 @@ namespace Forecaster.Tests.Core.Action
         {
             IForecastArguments arguments = new TestForecastArguments(new[] { 5.0, 5.0, 5.0 }, 5, 1000);
             Trials fakeTrials = new double[] { 1, 2, 3, 4, 5 };
-            var fakeForecast = new Bucket[] { new Bucket(100.0m, 1) };
+            var fakeForecast = new[] { new Bucket(100.0m, 1) };
 
             TrialsMock.GenerateFrom(arguments).Returns(fakeTrials);
             ForecastMock.Summarize(fakeTrials).Returns(fakeForecast);

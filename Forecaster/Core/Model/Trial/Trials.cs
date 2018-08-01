@@ -21,13 +21,7 @@ namespace Forecaster.Core.Model.Trial
 
         public int Count => data.Length;
 
-        public double this[int index]
-        {
-            get
-            {
-                return data[index];
-            }
-        }
+        public double this[int index] => data[index];
 
         public double Max
         {
@@ -42,8 +36,8 @@ namespace Forecaster.Core.Model.Trial
         public Trials(IEnumerable<double> data)
         {
             this.data = data.ToArray();
-            Max = data.Max();
-            Min = data.Min();
+            Max = this.data.Max();
+            Min = this.data.Min();
         }
 
         public IEnumerator<double> GetEnumerator()
@@ -63,7 +57,7 @@ namespace Forecaster.Core.Model.Trial
 
         private int ThatMeetOrExceed(double value)
         {
-            return data.Where(t => t >= value).Count();
+            return data.Count(t => t >= value);
         }
     }
 }

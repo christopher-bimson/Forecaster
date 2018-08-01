@@ -1,4 +1,4 @@
-﻿using Forecaster.Core.Model.Action;
+﻿using Forecaster.Core.Action;
 
 namespace Forecaster.Tests.Core.Action
 {

@@ -2,9 +2,7 @@
 using Forecaster.Core.Model.Summary;
 using NSubstitute;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Xunit;
 
 namespace Forecaster.Tests.Application.Output

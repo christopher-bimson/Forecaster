@@ -2,11 +2,11 @@
 
 namespace Forecaster.Core.Model.Trial
 {
-    public class RandomRng : IRng
+    public class SystemRandomRng : IRng
     {
         private readonly Random random;
 
-        public RandomRng()
+        public SystemRandomRng()
         {
             random = new Random();
         }

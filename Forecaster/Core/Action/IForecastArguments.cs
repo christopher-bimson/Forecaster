@@ -1,4 +1,4 @@
-﻿namespace Forecaster.Core.Model.Action
+﻿namespace Forecaster.Core.Action
 {
     public interface IForecastArguments
     {

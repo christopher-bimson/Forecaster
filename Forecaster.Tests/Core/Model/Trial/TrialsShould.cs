@@ -2,7 +2,7 @@
 using Forecaster.Core.Model.Trial;
 using Xunit;
 
-namespace Forecaster.Tests.Core.Model
+namespace Forecaster.Tests.Core.Model.Trial
 {
     public class TrialsShould
     {

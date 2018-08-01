@@ -11,7 +11,11 @@ namespace Forecaster.Core.Model.Summary
         {
             var targetBucketCount = GetNumberOfBuckets(trials);
             var bucketSize = GetSizeOfBuckets(trials, targetBucketCount);
+            return SummarizeTrialsIntoBuckets(trials, bucketSize);
+        }
 
+        private static Buckets SummarizeTrialsIntoBuckets(Trials trials, int bucketSize)
+        {
             var buckets = new Buckets();
             var threshold = GetStartingThreshold(trials.Min, bucketSize);
             do
@@ -20,6 +24,7 @@ namespace Forecaster.Core.Model.Summary
                 var likelihood = trials.CalculateLikelihoodOf(threshold);
                 buckets.Add(likelihood, threshold);
             } while (AreLikelihoodsToCalculate(trials.Max, threshold));
+
             return buckets;
         }
 

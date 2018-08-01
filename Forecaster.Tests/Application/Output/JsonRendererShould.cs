@@ -28,7 +28,7 @@ namespace Forecaster.Tests.Application.Output
             writer.Received().Write(Arg.Is<string>(json => DeserializesTo(json, summary)));
         }
 
-        private bool DeserializesTo(string json, Bucket[] summary)
+        private bool DeserializesTo(string json, IEnumerable<Bucket> summary)
         {
             var deserializedSummary = JsonConvert.DeserializeObject<IEnumerable<Bucket>>(json);
             deserializedSummary.Should().BeEquivalentTo(summary);

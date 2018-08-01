@@ -1,7 +1,7 @@
 ﻿using CommandLine;
-using Forecaster.Core.Model.Action;
 using System.Collections.Generic;
 using System.Linq;
+using Forecaster.Core.Action;
 
 namespace Forecaster.Application.Input
 {

@@ -7,7 +7,7 @@ namespace Forecaster.Application.Output
 {
     public class JsonRenderer : IRenderer
     {
-        private TextWriter writer;
+        private readonly TextWriter writer;
 
         public JsonRenderer(TextWriter writer)
         {

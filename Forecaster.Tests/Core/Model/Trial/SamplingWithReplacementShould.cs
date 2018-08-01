@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using Forecaster.Tests.Core.Model.Trial;
 using Xunit;
 
 namespace Forecaster.Tests.Core.Model

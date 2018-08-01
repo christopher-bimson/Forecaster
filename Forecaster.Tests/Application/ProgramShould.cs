@@ -1,12 +1,9 @@
-﻿using CommandLine;
-using Forecaster.Application.Input;
+﻿using Forecaster.Application.Input;
 using Forecaster.Application.Output;
 using Forecaster.Core.Action;
-using Forecaster.Core.Model.Action;
 using Forecaster.Core.Model.Summary;
 using Forecaster.Core.Model.Trial;
 using NSubstitute;
-using System.Collections.Generic;
 using System.IO;
 using Xunit;
 
@@ -35,25 +32,25 @@ namespace Forecaster.Tests.Application
         [Fact]
         public void Accept_Valid_Arguments_And_Print_A_Forecast()
         {
-            var args = "--samples 1 2 3 4 5 --forecast 3 --trials 1000".Split(' ');
-            var parsedArguments = new Options
+            var validArguments = "--samples 1 2 3 4 5 --forecast 3 --trials 1000".Split(' ');
+            var parsedValidArguments = new Options
             {
                 Samples = new[] {1.0, 2.0, 3.0, 4.0, 5.0},
                 Trials = 1000,
                 Forecast = 3
             };
-            var forecast = new Bucket[] { new Bucket(100, 1) };
+            var forecast = new[] { new Bucket(100, 1) };
 
-            parser.Parse(args).Returns(new Alternative<Options, string>(parsedArguments));
-            forecastAction.Execute(parsedArguments).Returns(forecast);
-            rendererFactory.CreateFor(parsedArguments.Output).Returns(renderer);
+            parser.Parse(validArguments).Returns(new Alternative<Options, string>(parsedValidArguments));
+            forecastAction.Execute(parsedValidArguments).Returns(forecast);
+            rendererFactory.CreateFor(parsedValidArguments.Output).Returns(renderer);
             
             var program = new Program(parser, stdOut, forecastAction, rendererFactory);
-            program.Run(args);
+            program.Run(validArguments);
 
-            parser.Received().Parse(args);
-            forecastAction.Received().Execute(parsedArguments);
-            rendererFactory.Received().CreateFor(parsedArguments.Output);
+            parser.Received().Parse(validArguments);
+            forecastAction.Received().Execute(parsedValidArguments);
+            rendererFactory.Received().CreateFor(parsedValidArguments.Output);
             renderer.Received().Render(forecast);
         }
 
@@ -70,7 +67,6 @@ namespace Forecaster.Tests.Application
             forecastAction.DidNotReceive().Execute(Arg.Any<IForecastArguments>());
             rendererFactory.DidNotReceive().CreateFor(Arg.Any<OutputFormat>());
             stdOut.Received().Write(helpText);
-
         }
     }
 }
