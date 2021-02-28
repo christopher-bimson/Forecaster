@@ -1,17 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forecaster", "Forecaster\Forecaster.csproj", "{C5E7A9E2-D675-447B-AF8F-BFCA02CF8280}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Forecaster", "Forecaster\Forecaster.fsproj", "{8862A094-219F-4542-A119-14A180168AC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forecaster.Tests", "Forecaster.Tests\Forecaster.Tests.csproj", "{5519D522-A47F-48AE-8AA8-A1AD67745C76}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C4080B2-503B-4AEB-BE8E-C06AC1490E78}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Forecaster.Tests", "Forecaster.Tests\Forecaster.Tests.fsproj", "{0C1D51E7-221E-44EA-8C6E-533964D27163}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,19 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5E7A9E2-D675-447B-AF8F-BFCA02CF8280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5E7A9E2-D675-447B-AF8F-BFCA02CF8280}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5E7A9E2-D675-447B-AF8F-BFCA02CF8280}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5E7A9E2-D675-447B-AF8F-BFCA02CF8280}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5519D522-A47F-48AE-8AA8-A1AD67745C76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5519D522-A47F-48AE-8AA8-A1AD67745C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5519D522-A47F-48AE-8AA8-A1AD67745C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5519D522-A47F-48AE-8AA8-A1AD67745C76}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A2267569-6E09-476B-B151-BF9753C333AB}
+		{8862A094-219F-4542-A119-14A180168AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8862A094-219F-4542-A119-14A180168AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8862A094-219F-4542-A119-14A180168AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8862A094-219F-4542-A119-14A180168AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C1D51E7-221E-44EA-8C6E-533964D27163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1D51E7-221E-44EA-8C6E-533964D27163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C1D51E7-221E-44EA-8C6E-533964D27163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C1D51E7-221E-44EA-8C6E-533964D27163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

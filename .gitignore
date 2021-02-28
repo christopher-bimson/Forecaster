@@ -243,3 +243,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# Jetbrains
+riderModule.iml
+/_ReSharper.Caches/
+.idea
