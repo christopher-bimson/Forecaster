@@ -1,5 +1,5 @@
 # Forecaster
-Forecaster is  a simple .NET Core console application that can create a forecast of the future value of some variable using
+Forecaster is a simple .NET Core console application that can create a forecast of the future value of some variable using
 some historic data points and a Monte Carlo simulation.
 
 The original purpose of this application was to forecast the mid-to-long term progress of a software development
@@ -12,34 +12,44 @@ useful when originally putting this together, and contains a lot of useful resou
 I've subsequently used this to forecast other things, so during the port to .NET Core the language of 
 the interface became a bit more general.
 
+As a result of wanting to make some changes to the output (mainly adding a summary by quartiles to give an easier to use worse/median/best case forecast) I rewrote it in F# because:
+
+1. C# just keeps getting more and more incoherent and it annoys me.
+2. To practice F# and a more functional approach to programming.
+
+As a result, as well as the new additional features, the CLI has changed in some cosmetic ways as a result of switching to Argu.
+
 ## Build
 ```
 dotnet build Forecaster.sln
 ```
 
-Or use your favourite IDE.
+## Test
+```
+dotnet test Forecaster.sln
+```
+
+Or use your favorite IDE.
 
 ## Usage
 ```
-dotnet Forecaster.dll --help
+USAGE: forecaster [--help] [--command <percentile|quartile>]
+                  [--samples [<double>...]] [--iterations <uint>]
+                  [--trials <uint>] [--format <pretty|tsv>]
 
-Forecaster 1.0.0
-Copyright (C) 2018 Forecaster
+OPTIONS:
 
-  -s, --samples         Required. Sample data points of the value you want to
-                        forecast.
-
-  -f, --forecast        Required. The number of data points 'ahead' to
-                        forecast.
-
-  -t, --trials          (Default: 100000) The number of trials to use to build
-                        the forecast. Each trial is a 'potential future' that
-                        will contribute to the forecast.
-
-  -o, --outputFormat    (Default: Pretty) The output format of the forecast.
-                        Valid values are: Pretty, Markdown, JSON and CSV.
-
-  --help                Display this help screen.
-
-  --version             Display version information.
+    --command <percentile|quartile>
+                          (default: percentile) The type of forecast to
+                          generate.
+    --samples [<double>...]
+                          (required) Sample data points of the value you want
+                          to forecast.
+    --iterations <uint>   (required) The number of data points 'ahead' to
+                          forecast.
+    --trials <uint>       (default: 100000) The number of trials to use to
+                          build the forecast. Each trial is a 'potential
+                          future' that will contribute to the forecast.
+    --format <pretty|tsv> (default: pretty) The output format of the forecast.
+    --help                display this list of options.
 ```
