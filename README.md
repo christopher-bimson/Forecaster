@@ -14,7 +14,7 @@ the interface became a bit more general.
 
 As a result of wanting to make some changes to the output (mainly adding a summary by quartiles to give an easier to use worse/median/best case forecast) I rewrote it in F# because:
 
-1. C# just keeps getting more and more incoherent and it annoys me.
+1. C# just gets more and more incoherent with each release as new features are thrown into the bucket, and as a result the language is starting to annoy me.
 2. To practice F# and a more functional approach to programming.
 
 As a result, as well as the new additional features, the CLI has changed in some cosmetic ways as a result of switching to Argu.
@@ -28,8 +28,6 @@ dotnet build Forecaster.sln
 ```
 dotnet test Forecaster.sln
 ```
-
-Or use your favorite IDE.
 
 ## Usage
 ```
