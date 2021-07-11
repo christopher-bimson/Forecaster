@@ -1,6 +1,9 @@
 module Forecaster.Wasm.Views
 
-open Forecaster.Wasm.Models
+open Forecaster.Wasm.ViewModelTypes
+open Forecaster.Wasm.Goals
+open Forecaster.Wasm.Samples
+open Forecaster.Wasm.Forecasting
 open Bolero
 open Bolero.Html
 open GGNet
@@ -85,12 +88,12 @@ open GGNet
             let projections = Set.empty.Add("Optimistic").Add("Median").Add("Conservative")
             Seq.filter (fun p -> not (Set.contains p.label projections))
         
-        match Seq.length model.source = 0 with
+        match Seq.length model.chartData = 0 with
         | true -> empty 
-        | false -> let data = Plot.New(model.source, x = (fun o -> float o.iteration), y = (fun o -> float o.throughput))
-                                .Geom_Area(projectionFilter model.source, alpha = 0.5)
+        | false -> let data = Plot.New(model.chartData, x = (fun o -> float o.iteration), y = (fun o -> float o.value))
+                                .Geom_Area(projectionFilter model.chartData, alpha = 0.5)
                                 .Scale_Fill_Discrete((fun o -> o.label), Colours.forecast)
-                                .Geom_Line(goalFilter model.source, width = 3.0)
+                                .Geom_Line(goalFilter model.chartData, width = 3.0)
                                 .Scale_Color_Discrete((fun o -> o.label), Colours.goals, guide = true)
                                 .Scale_X_Discrete()
                                 .Title("Forecast")
@@ -98,7 +101,7 @@ open GGNet
                                 .XLab("Iterations")
                                 .Theme(dark = false)
                    div[attr.classes ["container";"shadow-sm"]][
-                     comp<GGNet.Components.Plot<ForecastPoint,double,double>>["data" => data][]
+                     comp<GGNet.Components.Plot<ChartPoint,float,float>>["data" => data][]
                      hr[]
                    ]
                    

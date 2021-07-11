@@ -4,8 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Numbers.fs" />
     <Compile Include="List.fs" />
-    <Compile Include="Models.fs" />
+    <Compile Include="ViewModelTypes.fs" />
+    <Compile Include="Samples.fs" />
+    <Compile Include="Goals.fs" />
+    <Compile Include="Forecasting.fs" />
+    <Compile Include="ViewModel.fs" />
     <Compile Include="Views.fs" />
     <Compile Include="Main.fs" />
     <Compile Include="Startup.fs" />

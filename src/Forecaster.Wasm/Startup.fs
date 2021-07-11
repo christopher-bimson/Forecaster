@@ -5,11 +5,11 @@ open Microsoft.Extensions.DependencyInjection
 open System
 open System.Net.Http
 
-module Program =
+    module Program =
 
-    [<EntryPoint>]
-    let Main args =
-        let builder = WebAssemblyHostBuilder.CreateDefault(args)
-        builder.RootComponents.Add<Main.App>("#main")
-        builder.Build().RunAsync() |> ignore
-        0
+        [<EntryPoint>]
+        let Main args =
+            let builder = WebAssemblyHostBuilder.CreateDefault(args)
+            builder.RootComponents.Add<Main.App>("#main")
+            builder.Build().RunAsync() |> ignore
+            0
