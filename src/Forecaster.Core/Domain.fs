@@ -1,6 +1,6 @@
-module Forecaster.Domain
+module Forecaster.Core.Domain
 
-open Forecaster.DomainTypes
+open Forecaster.Core.DomainTypes
 
 open System
 open MathNet.Numerics.Statistics

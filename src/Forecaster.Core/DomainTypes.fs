@@ -1,4 +1,4 @@
-module Forecaster.DomainTypes
+module Forecaster.Core.DomainTypes
 
 
 type LikelihoodOfValue = {

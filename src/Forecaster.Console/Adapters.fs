@@ -1,11 +1,11 @@
-module Forecaster.Adapters
+module Forecaster.Console.Adapters
 
 open System.Text
 open BetterConsoleTables
-open Forecaster.AdapterTypes
+open Forecaster.Console.AdapterTypes
 
 open Argu
-open Forecaster.DomainTypes
+open Forecaster.Core.DomainTypes
 
 let handler percentile quartile output arguments =
     let command = 

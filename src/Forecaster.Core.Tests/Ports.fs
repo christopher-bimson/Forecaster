@@ -1,7 +1,7 @@
-module Forecaster.Tests.Ports
+module Forecaster.Core.Tests.Ports
 
-    open Forecaster.DomainTypes
-    open Forecaster.Ports
+    open Forecaster.Core.DomainTypes
+    open Forecaster.Core.Ports
     
     open FsUnit
     open NUnit.Framework
@@ -30,5 +30,5 @@ module Forecaster.Tests.Ports
                 ts |> should equal generatedTrials
                 expectedForecast
                 
-            forecastCommand mockedTrials mockedForecast samples iterations trials
+            createForecast mockedTrials mockedForecast samples iterations trials
                 |> should equal expectedForecast

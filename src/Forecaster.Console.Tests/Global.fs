@@ -2,5 +2,5 @@ namespace global
     
     open FsUnit
 
-    type ``Forecaster Tests``() =
+    type ``Forecaster Console Tests``() =
         inherit FSharpCustomMessageFormatter()

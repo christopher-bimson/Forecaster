@@ -36,7 +36,7 @@ OPTIONS:
                 let stdOut: StringWriter = new StringWriter()
                 Console.SetOut(stdOut)
                 
-                Forecaster.Program.main argv |> should equal -1
+                Forecaster.Console.Program.main argv |> should equal -1
                 
                 stdout.Flush()
                 stdOut.ToString() |> should equal expectedOutput
@@ -74,7 +74,7 @@ OPTIONS:
                 let stdOut: StringWriter = new StringWriter()
                 Console.SetOut(stdOut)
                 
-                Forecaster.Program.main argv |> should equal 0
+                Forecaster.Console.Program.main argv |> should equal 0
                 
                 stdout.Flush()
                 stdOut.ToString() |> should equal expectedOutput
@@ -97,7 +97,7 @@ OPTIONS:
                 let stdOut: StringWriter = new StringWriter()
                 Console.SetOut(stdOut)
                 
-                Forecaster.Program.main argv |> should equal 0
+                Forecaster.Console.Program.main argv |> should equal 0
                 
                 stdout.Flush()
                 stdOut.ToString() |> should equal expectedOutput

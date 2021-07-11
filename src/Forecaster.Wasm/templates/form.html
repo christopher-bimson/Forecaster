@@ -1,0 +1,21 @@
+<div class="container shadow-sm">
+    <div class="row">
+        <div class="col">
+            <h4>Iterations to Forecast</h4>
+            <div class="form-group">
+                <input type="text" placeholder="Number of iterations to forecast..." class="form-control" bind-onchange="${Iterations}">
+            </div>
+        </div>
+        <div class="col-3">
+            <h4>&nbsp;</h4>
+            <div class="form-group float-right">
+                ${ForecastButton}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        ${Samples}
+        ${Goals}
+    </div>
+</div>
+

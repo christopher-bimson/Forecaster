@@ -1,8 +1,8 @@
 module Forecaster.Tests.Adapters
 
-open Forecaster.DomainTypes
-open Forecaster.AdapterTypes
-open Forecaster.Adapters
+open Forecaster.Core.DomainTypes
+open Forecaster.Console.AdapterTypes
+open Forecaster.Console.Adapters
 
 open NUnit.Framework
 open FsUnit

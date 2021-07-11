@@ -1,0 +1,27 @@
+<div class="col">
+    <h4>Future Goals</h4>
+    <div class="form-group">
+        <input type="text" class="form-control" bind="${Name}" placeholder="Give your goal a name..."/>
+    </div>
+    <div class="form-group">
+        <ul class="list-group">
+            ${GoalList}
+            <template id="GoalListItem">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${Goal}
+                    <button type="button" class="btn btn-danger btn-sm" onclick="${RemoveGoal}">X</button>
+                </li>
+            </template>
+        </ul>
+    </div>
+</div>
+<div class="col">
+    <h4>&nbsp</h4>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" bind="${Target}" placeholder="...and a target value." />
+        <div class="input-group-append">
+            ${AddGroupButton}
+        </div>
+    </div>
+</div>
+

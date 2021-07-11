@@ -1,9 +1,9 @@
-module Forecaster.Tests.Domain
+module Forecaster.Core.Tests.Domain
 
-    open Forecaster.Domain
+    open Forecaster.Core.Domain
     
     open System
-    open Forecaster.DomainTypes
+    open Forecaster.Core.DomainTypes
     open NUnit.Framework
     open FsUnit
     open FsCheck

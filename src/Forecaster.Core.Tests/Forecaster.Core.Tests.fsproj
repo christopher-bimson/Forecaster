@@ -8,24 +8,22 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FsCheck.NUnit" Version="2.15.1" />
+        <PackageReference Include="FsCheck.NUnit" Version="2.15.3" />
         <PackageReference Include="FsUnit" Version="4.0.4" />
-        <PackageReference Include="NUnit" Version="3.13.1" />
-        <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+        <PackageReference Include="NUnit" Version="3.13.2" />
+        <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     </ItemGroup>
 
     <ItemGroup>
         <Compile Include="Global.fs" />
         <Compile Include="Domain.fs" />
         <Compile Include="Ports.fs" />
-        <Compile Include="Adapters.fs" />
-        <Compile Include="Acceptance.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Forecaster\Forecaster.fsproj" />
+      <ProjectReference Include="..\Forecaster.Core\Forecaster.Core.fsproj" />
     </ItemGroup>
 
 </Project>

@@ -3,13 +3,11 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <AssemblyName>forecaster</AssemblyName>
-        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+        <RootNamespace>Forecaster</RootNamespace>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="DomainTypes.fs" />
-        <Compile Include="Domain.fs" />
-        <Compile Include="Ports.fs" />
         <Compile Include="AdapterTypes.fs" />
         <Compile Include="Adapters.fs" />
         <Compile Include="Program.fs" />
@@ -19,6 +17,10 @@
       <PackageReference Include="Argu" Version="6.1.1" />
       <PackageReference Include="BetterConsoleTables" Version="1.1.2" />
       <PackageReference Include="MathNet.Numerics" Version="4.15.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Forecaster.Core\Forecaster.Core.fsproj" />
     </ItemGroup>
 
 </Project>

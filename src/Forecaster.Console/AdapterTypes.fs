@@ -1,4 +1,4 @@
-module Forecaster.AdapterTypes
+module Forecaster.Console.AdapterTypes
 
 open Argu
 

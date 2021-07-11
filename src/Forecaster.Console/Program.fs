@@ -1,10 +1,10 @@
-﻿module Forecaster.Program
+﻿module Forecaster.Console.Program
+
+open Forecaster.Core.Ports
 
 let resolveHandler =
-    let quartile = Ports.forecastCommand Domain.generateTrials Domain.summarizeByQuartile
-    let percentile = Ports.forecastCommand Domain.generateTrials Domain.summarizeByPercentile
     let output = Adapters.output Adapters.pretty Adapters.tsv
-    Adapters.handler percentile quartile output
+    Adapters.handler createPercentileForecast createQuartileForecast output
 
 [<EntryPoint>]
 let main argv =
