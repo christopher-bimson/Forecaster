@@ -8,20 +8,21 @@ module Forecaster.Wasm.Goals
         
     let setTarget model value =
         { model with nextTarget = value }
-     
-    let internal goalTargetIsValid target =
-        match parseFloat target with
-            | Some number -> if number > 0. then true else false
-            | None -> false
             
-    let internal goalNameIsUnique goals name =
-         not (List.exists (fun (g: Goal) -> g.name = name) goals)
-       
+    let internal goalIsValid goals name target =
+        let parsedTarget =
+          match parseFloat target with
+            | Some number -> number
+            | None -> 0.
+        
+        not (name = "")
+        && parsedTarget > 0.
+        && not (List.exists (fun (g: Goal) -> g.name = name || g.target = parsedTarget) goals)
+        
     let canAddGoal proposedGoal =
         let model, name, target = proposedGoal
-        goalNameIsUnique model.goals name
-            && goalTargetIsValid target
-            && List.length model.goals < 4
+        goalIsValid model.goals name target
+        && List.length model.goals < 5
         
     let addGoal model =
         match canAddGoal (model, model.nextName, model.nextTarget) with

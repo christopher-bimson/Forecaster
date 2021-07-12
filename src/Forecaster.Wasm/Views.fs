@@ -99,7 +99,7 @@ open GGNet
                                 .Title("Forecast")
                                 .YLab("Throughput")
                                 .XLab("Iterations")
-                                .Theme(dark = false)
+                                .Theme(dark = false, legend = Position.Bottom)
                    div[attr.classes ["container";"shadow-sm"]][
                      comp<GGNet.Components.Plot<ChartPoint,float,float>>["data" => data][]
                      hr[]
