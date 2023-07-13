@@ -4,7 +4,7 @@ some historic data points and a Monte Carlo simulation.
 
 The original purpose of this application was to forecast the mid-to-long term progress of a software development
 team using it's historic throughput, as a less wasteful an more accurate alternative to estimation. See my original 
-[blog post](https://christopher-bimson.github.io/2017-04-19-forecaster/) for more information.
+[blog post](https://christopher-bimson.github.io/posts/forecasting/) for more information.
  
 [FocusedObjective](https://github.com/FocusedObjective/FocusedObjective.Resources) was very
 useful when originally putting this together, and contains a lot of useful resources on this topic that are well worth looking at.
